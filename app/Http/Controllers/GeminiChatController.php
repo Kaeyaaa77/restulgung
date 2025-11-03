@@ -16,24 +16,58 @@ class GeminiChatController extends Controller
         }
         $userMessage = $request->input('message');
         $chatHistory = $request->input('history', []);
-        $systemInstructionText = "Anda adalah Gemini Chatbot resmi Polres Tulungagung. Jawablah pertanyaan masyarakat dengan ramah, profesional, dan informatif. Fokus pada informasi umum kepolisian, layanan SKCK, SIM, aduan, dan inovasi Polres Tulungagung. Jawab dalam Bahasa Indonesia. Jika pertanyaan di luar konteks yang relevan dengan Polres Tulungagung, arahkan mereka untuk menghubungi Call Center 110. SELALU jawab sebagai asisten Polres Tulungagung.";
-        $initialPrompt = $systemInstructionText . "\n\nPertanyaan user: " . $userMessage;
-        $contents = collect($chatHistory)->map(function ($message) {
+        $systemInstructionText = "PERINTAH TEGAS: Anda adalah 'Gayatri AI', asisten AI resmi Polres Tulungagung. Peran Anda HANYA menjawab pertanyaan seputar kepolisian, layanan Polres Tulungagung (SKCK, SIM, aduan, dll), dan informasi terkait. JANGAN PERNAH menjawab pertanyaan di luar topik ini (misal: resep, cuaca, politik, sejarah, koding, dll).
+ATURAN RESPON:
+1.  Jika pertanyaan relevan dengan topik kepolisian/Polres Tulungagung: Jawab dengan ramah, profesional, dan informatif dalam Bahasa Indonesia.
+2.  Jika pertanyaan TIDAK relevAN (di luar topik): Jawab HANYA dengan kalimat ini dan tidak boleh ada tambahan lain: 'Mohon maaf, pertanyaan Anda di luar lingkup layanan kami. Silakan hubungi nomor darurat polisi 101 untuk bantuan lebih lanjut.'
+Ini adalah aturan mutlak. Jangan melanggar.";
+        // --- AKHIR MODIFIKASI INSTRUKSI ---
+
+        // --- LOGIKA PEMBUATAN 'CONTENTS' DIPERBARUI ---
+        // Kita "mem-priming" model dengan instruksi sistem SETIAP SAAT.
+
+        // 1. Mulai dengan instruksi sistem (sebagai 'user' pertama) dan jawaban 'model'
+        // Ini memberitahu AI perannya SEBELUM melihat pertanyaan user.
+        $primingMessages = [
+            [
+                'role' => 'user',
+                'parts' => [['text' => $systemInstructionText]]
+            ],
+            [
+                'role' => 'model',
+                'parts' => [['text' => 'Saya mengerti. Saya adalah Gayatri AI dan hanya akan menjawab pertanyaan seputar Polres Tulungagung.']]
+            ]
+        ];
+
+        // 2. Ambil riwayat chat yang sudah ada dari frontend
+        $historyMessages = collect($chatHistory)->map(function ($message) {
             return [
                 'role' => $message['role'],
                 'parts' => [['text' => $message['text']]]
             ];
-        })->push([
+        })->toArray();
+
+        // 3. Tambahkan pesan user yang baru
+        $newUserMessage = [
             'role' => 'user',
-            'parts' => [['text' => (empty($chatHistory) ? $initialPrompt : $userMessage)]]
-        ])->toArray();
+            'parts' => [['text' => $userMessage]]
+        ];
+
+        // 4. Gabungkan semuanya: Instruksi -> Riwayat -> Pesan Baru
+        $contents = array_merge(
+            $primingMessages, // Selalu mulai dengan instruksi
+            $historyMessages, // Lalu tambahkan riwayat
+            [$newUserMessage]  // Terakhir, tambahkan pesan baru
+        );
+        // --- AKHIR PERUBAHAN LOGIKA 'CONTENTS' ---
+
 
         try {
             $response = Http::timeout(30)->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' . env('GEMINI_API_KEY'), [
                 'contents' => $contents,
 
                 'generationConfig' => [
-                    'temperature' => 0.7,
+                    'temperature' => 0.7, // Dibuat sedikit lebih kaku
                 ],
             ]);
 
