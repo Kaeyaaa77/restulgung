@@ -53,7 +53,7 @@
                     <li><a href="{{ url('/#berita') }}" class="hover:text-yellow-400">BERITA</a></li>
                     <li><a href="{{ route('profil.publik') }}" class="hover:text-yellow-400">PROFIL</a></li>
                     <li><a href="{{ route('inovasi.index') }}" class="hover:text-yellow-400">INOVASI</a></li>
-                    <li><a href="{{ route('faq.index') }}" class="hover:text-yellow-400">FAQ</a></li>
+                    <li><a href="{{ route('faq.index') }}" class="hover:text-yellow-400">LAYANAN INFORMASI</a></li>
                 </ul>
             </nav>
         </div>
@@ -65,7 +65,7 @@
                 <li><a href="{{ url('/#berita') }}" class="hover:text-yellow-400">BERITA</a></li>
                 <li><a href="{{ route('profil.publik') }}" class="hover:text-yellow-400">PROFIL</a></li>
                 <li><a href="{{ route('inovasi.index') }}" class="hover:text-yellow-400">INOVASI</a></li>
-                <li><a href="{{ route('faq.index') }}" class="hover:text-yellow-400">FAQ</a></li>
+                <li><a href="{{ route('faq.index') }}" class="hover:text-yellow-400">LAYANAN INFORMASI</a></li>
             </ul>
         </div>
     </header>

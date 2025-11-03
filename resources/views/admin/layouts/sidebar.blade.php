@@ -18,7 +18,7 @@
         {{-- Link Dashboard --}}
         <a href="{{ route('admin.dashboard') }}"
             class="flex items-center px-4 py-2.5 text-sm rounded-lg transition duration-200
-                  {{ request()->routeIs('admin.dashboard') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
+                   {{ request()->routeIs('admin.dashboard') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
             <span class="material-symbols-outlined mr-3">dashboard</span>
             Dashboard
         </a>
@@ -26,7 +26,7 @@
         {{-- Link Berita & Informasi --}}
         <a href="{{ route('admin.beritas.index') }}"
             class="flex items-center px-4 py-2.5 text-sm rounded-lg transition duration-200
-                  {{ request()->routeIs('admin.beritas.*') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
+                   {{ request()->routeIs('admin.beritas.*') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
             <span class="material-symbols-outlined mr-3">article</span>
             Berita & Informasi
         </a>
@@ -34,23 +34,29 @@
         {{-- Link Galeri --}}
         <a href="{{ route('admin.galleries.index') }}"
             class="flex items-center px-4 py-2.5 text-sm rounded-lg transition duration-200
-                  {{ request()->routeIs('admin.galleries.*') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
+                   {{ request()->routeIs('admin.galleries.*') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
             <span class="material-symbols-outlined mr-3">photo_library</span>
             Galeri
         </a>
 
-        {{-- Link Laporan Aduan --}}
+        {{-- === AWAL PERBAIKAN === --}}
+        {{--
+            Logika diubah menjadi:
+            Aktif jika route adalah 'admin.aduan.*' DAN BUKAN 'admin.aduan.map'
+        --}}
         <a href="{{ route('admin.aduan.index') }}"
             class="flex items-center px-4 py-2.5 text-sm rounded-lg transition duration-200
-                  {{ request()->routeIs('admin.aduan.*') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
+                   {{ request()->routeIs('admin.aduan.*') && !request()->routeIs('admin.aduan.map') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
             <span class="material-symbols-outlined mr-3">report</span>
             Laporan Aduan
         </a>
+        {{-- === AKHIR PERBAIKAN === --}}
+
 
         {{-- Link Peta Aduan (NEW LINK) --}}
         <a href="{{ route('admin.aduan.map') }}"
             class="flex items-center px-4 py-2.5 text-sm rounded-lg transition duration-200
-                  {{ request()->routeIs('admin.aduan.map') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
+                   {{ request()->routeIs('admin.aduan.map') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
             <span class="material-symbols-outlined mr-3">map</span>
             Peta Aduan
         </a>

@@ -40,8 +40,6 @@
             </main>
         </div>
     </div>
-
-    {{-- NEW: Stack untuk JavaScript kustom (misalnya Leaflet JS dan script peta) --}}
     @stack('scripts')
 </body>
 

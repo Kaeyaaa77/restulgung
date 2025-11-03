@@ -7,23 +7,54 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         #map-admin {
-            /* **PERBAIKAN KRITIS: Pastikan ketinggian (height) terdefinisi** */
             height: 600px;
             width: 100%;
             border-radius: 0.5rem;
-            /* Z-index 0 untuk mencegah konflik dengan elemen UI admin */
+            /* z-index 0 untuk mencegah konflik dengan elemen UI admin */
             z-index: 0;
+        }
+
+        /* Styling tambahan untuk popup agar lebih rapi */
+        .leaflet-popup-content-wrapper {
+            border-radius: 0.5rem;
+            /* Menyamakan radius dengan elemen lain */
+        }
+
+        .leaflet-popup-content {
+            margin: 12px 10px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
     </style>
 @endpush
 
 @section('content')
     <div class="p-6">
-        <h1 class="text-3xl font-bold text-gray-900 mb-6">🗺️ Peta Sebaran Laporan Aduan</h1>
-        <p class="text-gray-600 mb-4">Marker diklasifikasikan berdasarkan status laporan (Merah: Baru, Oranye: Dalam Proses,
-            Hijau: Selesai).</p>
+        <div class="flex items-center justify-between mb-4">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Peta Sebaran Laporan Aduan</h1>
+        </div>
 
-        <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+        <div class="mb-5 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-3">Status Laporan</h3>
+
+            <div class="flex flex-col sm:flex-row sm:items-center gap-x-6 gap-y-2">
+
+                <div class="flex items-center">
+                    <span class="h-4 w-4 rounded-full bg-red-500 border border-red-600 mr-2 flex-shrink-0"></span>
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Baru (Merah)</span>
+                </div>
+
+                <div class="flex items-center">
+                    <span class="h-4 w-4 rounded-full bg-orange-500 border border-orange-600 mr-2 flex-shrink-0"></span>
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Dalam Proses (Oranye)</span>
+                </div>
+
+                <div class="flex items-center">
+                    <span class="h-4 w-4 rounded-full bg-green-500 border border-green-600 mr-2 flex-shrink-0"></span>
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Selesai (Hijau)</span>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white shadow-xl rounded-lg overflow-hidden dark:bg-gray-800">
             {{-- DIV TEMPAT PETA HARUS ADA DI SINI --}}
             <div id="map-admin"></div>
         </div>
@@ -34,6 +65,63 @@
 @push('scripts')
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+    <script>
+        /**
+         * Menyalin teks dari elemen yang diberikan ID ke clipboard.
+         * Menggunakan API Clipboard modern jika tersedia, dengan fallback ke execCommand.
+         * @param {string} elementId ID dari elemen yang berisi teks koordinat.
+         */
+        function copyCoordinates(elementId) {
+            // 1. Dapatkan teks koordinat dari elemen span
+            const copyText = document.getElementById(elementId)?.textContent;
+
+            if (!copyText) {
+                console.error('Elemen koordinat tidak ditemukan:', elementId);
+                alert('Gagal menyalin: Elemen tidak ditemukan.');
+                return;
+            }
+
+            // 2. Gunakan API Clipboard modern (lebih aman dan asinkron)
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(copyText).then(() => {
+                    // Tampilkan notifikasi sukses
+                    alert('Koordinat berhasil disalin:\n' + copyText);
+                }).catch(err => {
+                    console.error('Gagal menyalin ke clipboard (API modern):', err);
+                    alert('Gagal menyalin. Silakan coba lagi.');
+                });
+            } else {
+                // 3. Fallback untuk browser lama atau koneksi non-HTTPS (menggunakan execCommand)
+                try {
+                    // Buat elemen textarea sementara
+                    const textArea = document.createElement("textarea");
+                    textArea.value = copyText;
+                    textArea.style.position = "fixed"; // Jauhkan dari pandangan
+                    textArea.style.top = 0;
+                    textArea.style.left = 0;
+                    textArea.style.opacity = 0;
+                    document.body.appendChild(textArea);
+
+                    textArea.select();
+                    textArea.setSelectionRange(0, 99999); // Untuk mobile
+
+                    const successful = document.execCommand('copy');
+
+                    if (successful) {
+                        alert('Koordinat berhasil disalin:\n' + copyText);
+                    } else {
+                        throw new Error('execCommand gagal');
+                    }
+
+                    document.body.removeChild(textArea);
+
+                } catch (err) {
+                    console.error('Gagal menyalin (fallback execCommand):', err);
+                    alert('Gagal menyalin. Browser Anda mungkin tidak mendukung fitur ini.');
+                }
+            }
+        }
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Default center: Polres Tulungagung
@@ -81,6 +169,12 @@
                         fillOpacity: 0.8
                     }).addTo(map);
 
+                    // --- MODIFIKASI POPUP CONTENT ---
+
+                    // Buat string koordinat dan ID unik untuk elemen
+                    const coordinates = `${aduan.latitude}, ${aduan.longitude}`;
+                    const coordId = `coord-${aduan.id}`; // ID unik untuk span koordinat
+
                     const contentString = `
                         <div class="p-1 w-72">
                             <h3 class="font-bold text-base mb-1">${aduan.nama}</h3>
@@ -92,13 +186,25 @@
                                 </span>
                             </p>
                             <p class="text-gray-700 text-sm mt-1"><strong>Lokasi:</strong> ${aduan.lokasi_kejadian}</p>
+                            <div>
+                                <p class="text-gray-700 text-sm font-semibold"><strong>Koordinat:</strong></p>
+                                <div class="flex items-center justify-between mt-1">
+                                    <span id="\${coordId}" class="text-sm text-gray-800 bg-gray-100 px-2 py-1 rounded-md" style="font-family: 'Courier New', Courier, monospace;">
+                                        ${coordinates}
+                                    </span>
 
-                            <div class="mt-3 text-right">
+                                    <button onclick="copyCoordinates('\${coordId}')" class="ml-2 px-3 py-1 bg-blue-500 text-white text-xs font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+                                        Salin
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-right border-t border-gray-200 pt-2">
                                 <a href="https://www.openstreetmap.org/?mlat=\${aduan.latitude}&mlon=\${aduan.longitude}#map=16/\${aduan.latitude}/\${aduan.longitude}" target="_blank" class="text-blue-500 hover:text-blue-700 text-sm font-medium">Lihat di OSM »</a>
-                                <a href="{{ url('admin/aduan') }}/\${aduan.id}" target="_blank" class="text-yellow-500 hover:text-yellow-700 text-sm font-medium ml-2">Lihat Detail »</a>
+                                <a href="{{ url('admin/aduan') }}/\${aduan.id}" target="_blank" class="text-yellow-600 hover:text-yellow-700 text-sm font-medium ml-3">Lihat Detail »</a>
                             </div>
                         </div>
                     `;
+                    // --- AKHIR MODIFIKASI POPUP CONTENT ---
 
                     circleMarker.bindPopup(contentString);
                     markers.push(circleMarker);
@@ -106,7 +212,6 @@
             });
 
             // Mengatasi masalah ukuran peta tidak terdeteksi:
-            // Panggil invalidateSize() setelah inisialisasi untuk memastikan peta menyesuaikan ke ukuran container.
             map.invalidateSize();
 
             if (markers.length > 0) {

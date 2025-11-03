@@ -70,7 +70,7 @@
                     <li><a href="{{ url('/#berita') }}" class="hover:text-yellow-400">BERITA</a></li>
                     <li><a href="{{ route('profil.publik') }}" class="hover:text-yellow-400">PROFIL</a></li>
                     <li><a href="{{ route('inovasi.index') }}" class="hover:text-yellow-400">INOVASI</a></li>
-                    <li><a href="{{ route('faq.index') }}" class="hover:text-yellow-400">FAQ</a></li>
+                    <li><a href="{{ route('faq.index') }}" class="hover:text-yellow-400">LAYANAN INFORMASI</a></li>
                 </ul>
             </nav>
         </div>
@@ -81,7 +81,7 @@
                 <li><a href="{{ url('/#berita') }}" class="hover:text-yellow-400">BERITA</a></li>
                 <li><a href="{{ route('profil.publik') }}" class="hover:text-yellow-400">PROFIL</a></li>
                 <li><a href="{{ route('inovasi.index') }}" class="hover:text-yellow-400">INOVASI</a></li>
-                <li><a href="{{ route('faq.index') }}" class="hover:text-yellow-400">FAQ</a></li>
+                <li><a href="{{ route('faq.index') }}" class="hover:text-yellow-400">LAYANAN INFORMASI</a></li>
             </ul>
         </div>
     </header>
@@ -210,18 +210,6 @@
                                     <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                                 @enderror
                             </div>
-                            {{-- <div>
-                                <label for="lokasi_kejadian"
-                                    class="block mb-2 text-sm font-medium text-gray-700">Lokasi
-                                    Kejadian</label>
-                                <input type="text" id="lokasi_kejadian" name="lokasi_kejadian"
-                                    value="{{ old('lokasi_kejadian') }}"
-                                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5"
-                                    required>
-                                @error('lokasi_kejadian')
-                                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div> --}}
                         </div>
 
                         <div>
@@ -235,17 +223,6 @@
                             @enderror
                         </div>
                         <div class="grid md:grid-cols-2 gap-6">
-                            {{-- <div>
-                                <label for="waktu_kejadian" class="block mb-2 text-sm font-medium text-gray-700">Waktu
-                                    Kejadian</label>
-                                <input type="datetime-local" id="waktu_kejadian" name="waktu_kejadian"
-                                    value="{{ old('waktu_kejadian') }}"
-                                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5"
-                                    required>
-                                @error('waktu_kejadian')
-                                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div> --}}
                             {{-- UBAH: Input Lokasi Kejadian dengan Map --}}
                             <div>
                                 <label for="lokasi_kejadian_text"
@@ -466,13 +443,13 @@
                         () => {
                             alert(
                                 "Error: Layanan geolokasi gagal atau ditolak. Silakan klik pada peta untuk memilih lokasi."
-                                );
+                            );
                         }
                     );
                 } else {
                     alert(
                         "Browser Anda tidak mendukung layanan geolokasi. Silakan klik pada peta untuk memilih lokasi."
-                        );
+                    );
                 }
             });
         });
