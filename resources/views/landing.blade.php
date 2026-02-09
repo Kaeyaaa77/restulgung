@@ -119,8 +119,8 @@
                             class="object-contain drop-shadow-lg h-[55vh] md:h-[80vh]" style="max-height: 700px;">
                         <div
                             class="absolute bottom-4 left-1/2 -translate-x-1/2 w-[90%] bg-yellow-500 text-black p-3 text-center">
-                            <p class="font-bold text-sm md:text-base">AKBP MUHAMMAD TAAT RESDIANTO, S.H., S.I.K.,
-                                M.T.C.P.</p>
+                            <p class="font-bold text-sm md:text-base">AKBP Dr. IHRAM KUSTARTO, S.H., S.I.K., M.Si., M.H.
+                            </p>
                             <p class="text-xs md:text-sm">Kapolres Tulungagung</p>
                         </div>
                     </div>

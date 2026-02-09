@@ -161,7 +161,7 @@
                                 :class="{
                                     'bg-yellow-400 text-gray-900 rounded-bl-lg rounded-tl-lg rounded-br-md p-3 max-w-[85%] shadow': message
                                         .role === 'user',
-                                    'bg-gray-100 text-gray-800 rounded-br-lg rounded-tr-lg rounded-tl-md p-3 max-w-[85%] shadow whitespace-pre-wrap': message
+                                    'bg-gray-300 text-gray-800 rounded-br-lg rounded-tr-lg rounded-tl-md p-3 max-w-[85%] shadow whitespace-pre-wrap': message
                                         .role === 'model'
                                 }">
                                 <p x-html="message.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')"></p>
