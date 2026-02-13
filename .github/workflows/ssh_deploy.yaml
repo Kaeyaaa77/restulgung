@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+      - main
+name: 🚀 SSH Deploy
+jobs:
+  build:
+    name: 🧑‍💻 Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📨 Get latest code
+        uses: actions/checkout@v3
+
+      - name: 🗃️ Sync files
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /home/restulgungjatim/Laravel/restulgung/
+            git pull origin main
+            php artisan optimize
+            git status
