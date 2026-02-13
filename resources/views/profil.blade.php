@@ -124,13 +124,12 @@
                 <div class="flex flex-wrap items-start md:flex-row-reverse" data-aos="fade-left">
                     <div class="w-full md:w-1/2 p-4">
                         <div class="grid grid-cols-2 gap-4">
-                            <img src="{{ asset('assets/images/posterkapolres.jpg') }}"
-                                alt="Poster Kapolres Tulungagung"
+                            <img src="{{ asset('assets/images/kapolresta.jpg') }}" alt="Poster Kapolres Tulungagung"
                                 class="w-full h-full object-cover rounded-lg shadow-xl">
                             <img src="{{ asset('assets/images/patrolimalam.png') }}" alt="Kegiatan patroli malam"
                                 class="w-full h-full object-cover rounded-lg shadow-xl">
-                            <img src="{{ asset('assets/images/pemberianpenghargaan.png') }}"
-                                alt="Pemberian penghargaan" class="w-full h-full object-cover rounded-lg shadow-xl">
+                            <img src="{{ asset('assets/images/110.jpg') }}" alt="110"
+                                class="w-full h-full object-cover rounded-lg shadow-xl">
                             <img src="{{ asset('assets/images/pengamanankegiatanmasyarakat.png') }}"
                                 alt="Pengamanan kegiatan masyarakat"
                                 class="w-full h-full object-cover rounded-lg shadow-xl">
@@ -165,24 +164,6 @@
                                 tepat pada kebijakan kemanan;</li>
                         </ol>
                     </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="pejabat-utama" class="bg-white py-20">
-            <div class="container mx-auto px-6 text-center" data-aos="fade-up">
-
-                <h2 class="text-3xl font-bold text-gray-800 uppercase tracking-wider">
-                    PJU dan Kapolsek Jajaran Polres Tulungagung
-                </h2>
-
-                <div class="w-20 h-1 bg-yellow-400 mt-2 mb-4 mx-auto"></div>
-
-                <div class="mt-8">
-                    <img src="{{ asset('assets/images/JAJARANKAPOLRES.png') }}"
-                        alt="PJU dan Kapolsek Jajaran Polres Tulungagung"
-                        class="rounded-lg shadow-xl w-full max-w-6xl mx-auto">
                 </div>
 
             </div>

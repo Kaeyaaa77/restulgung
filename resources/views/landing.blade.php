@@ -128,17 +128,6 @@
             </div>
         </main>
 
-        <section class="bg-gray-100 py-20">
-            <div class="container mx-auto px-4 text-center" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-gray-800 uppercase tracking-wider">PJU dan Kapolsek Jajaran Polres
-                    Tulungagung</h2>
-                <div class="w-24 h-1 bg-yellow-400 mx-auto mt-2 mb-12"></div>
-                <img src="{{ asset('assets/images/JAJARANKAPOLRES.png') }}"
-                    alt="Foto PJU dan Kapolsek Jajaran Polres Tulungagung"
-                    class="max-w-full h-auto mx-auto rounded-lg shadow-xl">
-            </div>
-        </section>
-
         <section id="layanan-umum" class="py-20 bg-white">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12" data-aos="fade-up">
