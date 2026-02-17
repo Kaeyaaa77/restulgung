@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Layanan Informasi - Polres Tulungagung</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -129,30 +130,19 @@
                     </button>
                 </div>
 
-                <div id="chat-box" class="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col-reverse"
+                <div id="chat-box" class="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col"
                     x-ref="messagesContainer">
-                    <div x-show="isLoading" class="flex justify-start items-start space-x-3">
-                        <div class="flex-shrink-0">
-                            <img src="{{ asset('assets/images/gayatriai.png') }}" alt="GAYATRI AI"
-                                class="ai-profile-img">
-                        </div>
-                        <div
-                            class="bg-gray-100 text-gray-500 rounded-br-lg rounded-tr-lg rounded-tl-md p-3 max-w-[85%]">
-                            <span class="inline-flex items-center">
-                                <span class="animate-bounce">.</span><span class="animate-bounce"
-                                    style="animation-delay: 100ms">.</span><span class="animate-bounce"
-                                    style="animation-delay: 200ms">.</span>
-                        </div>
-                    </div>
-                    <template x-for="message in messages.slice().reverse()" :key="message.id">
+
+                    <template x-for="message in messages" :key="message.id">
                         <div
                             :class="{
                                 'flex justify-end': message.role === 'user',
                                 'flex justify-start space-x-3 items-start': message.role === 'model'
                             }">
+
                             <template x-if="message.role === 'model'">
-                                <div class="flex-shrink-0">
-                                    <img src="{{ asset('assets/images/gayatriai.png') }}" alt="GAYATRI AI"
+                                <div class="flex-shrink-0 mt-1">
+                                    <img src="{{ asset('assets/images/Gayatriai.png') }}" alt="GAYATRI AI"
                                         class="ai-profile-img">
                                 </div>
                             </template>
@@ -168,6 +158,21 @@
                             </div>
                         </div>
                     </template>
+
+                    <div x-show="isLoading" class="flex justify-start items-start space-x-3">
+                        <div class="flex-shrink-0 mt-1">
+                            <img src="{{ asset('assets/images/Gayatriai.png') }}" alt="GAYATRI AI"
+                                class="ai-profile-img">
+                        </div>
+                        <div
+                            class="bg-gray-100 text-gray-500 rounded-br-lg rounded-tr-lg rounded-tl-md p-3 max-w-[85%]">
+                            <span class="inline-flex items-center">
+                                <span class="animate-bounce">.</span><span class="animate-bounce"
+                                    style="animation-delay: 100ms">.</span><span class="animate-bounce"
+                                    style="animation-delay: 200ms">.</span>
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
                 <form @submit.prevent="sendMessage()" class="p-4 border-t border-gray-200">
@@ -245,6 +250,98 @@
             duration: 800,
             once: false,
         });
+    </script>
+
+    <script>
+        function chatBot() {
+            return {
+                messages: [],
+                newMessage: '',
+                isLoading: false,
+                error: '',
+
+                initChat() {
+                    // Menambahkan pesan sambutan (opsional)
+                    this.messages.push({
+                        id: Date.now(),
+                        role: 'model',
+                        text: 'Halo! Saya GAYATRI AI, asisten virtual Polres Tulungagung. Ada yang bisa saya bantu terkait layanan kepolisian?'
+                    });
+                },
+
+                async sendMessage() {
+                    if (!this.newMessage.trim()) return;
+
+                    // 1. Simpan pesan user ke layar
+                    const userText = this.newMessage;
+                    this.messages.push({
+                        id: Date.now(),
+                        role: 'user',
+                        text: userText
+                    });
+
+                    // 2. Reset input & tampilkan loading
+                    this.newMessage = '';
+                    this.isLoading = true;
+                    this.error = '';
+
+                    // 3. AMBIL CSRF TOKEN DARI META TAG DI HEAD
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                    try {
+                        // 4. Kirim request dengan Header CSRF
+                        const response = await fetch("{{ route('chatbot.generate') }}", {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': csrfToken // BARIS INI SANGAT PENTING UNTUK CPANEL/LARAVEL
+                            },
+                            body: JSON.stringify({
+                                message: userText,
+                                history: this.messages.slice(0, -1) // Kirim riwayat obrolan sebelumnya
+                            })
+                        });
+
+                        const data = await response.json();
+
+                        // 5. Tangani jika ada error dari server
+                        if (!response.ok) {
+                            throw new Error(data.reply || 'Terjadi kesalahan pada server AI.');
+                        }
+
+                        // 6. Tampilkan balasan AI
+                        this.messages.push({
+                            id: Date.now(),
+                            role: 'model',
+                            text: data.reply
+                        });
+
+                    } catch (err) {
+                        this.error = err.message;
+                        this.messages.push({
+                            id: Date.now(),
+                            role: 'model',
+                            text: 'Maaf, gagal menghubungi GAYATRI AI. Pesan error: ' + err.message
+                        });
+                    } finally {
+                        this.isLoading = false;
+
+                        // Scroll otomatis ke bawah
+                        this.$nextTick(() => {
+                            const container = this.$refs.messagesContainer;
+                            if (container) container.scrollTop = container.scrollHeight;
+                        });
+                    }
+                },
+
+                clearChat() {
+                    this.messages = [];
+                    this.error = '';
+                    this.initChat();
+                }
+            }
+        }
     </script>
 </body>
 

@@ -100,11 +100,11 @@
                             informasi secara lengkap dan ter-update.</p>
                         <div class="md:hidden mt-12 flex justify-center pb-12">
                             <div class="relative pointer-events-auto">
-                                <img src="{{ asset('assets/images/Kapolres.png') }}" alt="Foto Kapolres"
+                                <img src="{{ asset('assets/images/kapolres.png') }}" alt="Foto Kapolres"
                                     class="object-contain drop-shadow-lg h-[55vh]" style="max-height: 500px;">
                                 <div
                                     class="absolute bottom-4 left-1/2 -translate-x-1/2 w-[90%] bg-yellow-500 text-black p-3 text-center">
-                                    <p class="font-bold text-sm">AKBP MUHAMMAD TAAT RESDIANTO, S.H., S.I.K., M.T.C.P.
+                                    <p class="font-bold text-sm">AKBP Dr. IHRAM KUSTARTO, S.H., S.I.K., M.Si., M.H.
                                     </p>
                                     <p class="text-xs">Kapolres Tulungagung</p>
                                 </div>
@@ -115,7 +115,7 @@
                 <div
                     class="hidden md:flex absolute z-20 bottom-0 inset-x-0 md:inset-x-auto md:right-0 pointer-events-none justify-center">
                     <div class="relative pointer-events-auto">
-                        <img src="{{ asset('assets/images/Kapolres.png') }}" alt="Foto Kapolres"
+                        <img src="{{ asset('assets/images/kapolres.png') }}" alt="Foto Kapolres"
                             class="object-contain drop-shadow-lg h-[55vh] md:h-[80vh]" style="max-height: 700px;">
                         <div
                             class="absolute bottom-4 left-1/2 -translate-x-1/2 w-[90%] bg-yellow-500 text-black p-3 text-center">
@@ -382,21 +382,22 @@
                     <h2 class="text-3xl font-bold text-gray-800 uppercase tracking-wider">Galeri</h2>
                     <div class="w-20 h-1 bg-yellow-400 mx-auto mt-2"></div>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @forelse ($galleries as $index => $gallery)
                         <div class="overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
                             data-aos="zoom-in" data-aos-delay="{{ $index * 100 }}">
-                            <a href="{{ asset('storage/' . $gallery->image) }}" data-fancybox="gallery"
-                                data-caption="{{ $gallery->title }}">
-                                <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"
-                                    class="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-300">
-                            </a>
+
+                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"
+                                class="w-full aspect-[4/5] object-cover transform hover:scale-110 transition-transform duration-300">
+
                         </div>
                     @empty
                         @for ($i = 1; $i <= 8; $i++)
                             <div class="overflow-hidden rounded-lg shadow-lg" data-aos="zoom-in"
                                 data-aos-delay="{{ ($i - 1) * 100 }}">
-                                <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+
+                                <div class="w-full aspect-[4/5] bg-gray-200 flex items-center justify-center">
                                     <span class="text-gray-500">Foto {{ $i }}</span>
                                 </div>
                             </div>
