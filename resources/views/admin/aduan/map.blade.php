@@ -10,14 +10,11 @@
             height: 600px;
             width: 100%;
             border-radius: 0.5rem;
-            /* z-index 0 untuk mencegah konflik dengan elemen UI admin */
             z-index: 0;
         }
 
-        /* Styling tambahan untuk popup agar lebih rapi */
         .leaflet-popup-content-wrapper {
             border-radius: 0.5rem;
-            /* Menyamakan radius dengan elemen lain */
         }
 
         .leaflet-popup-content {
@@ -55,24 +52,16 @@
             </div>
         </div>
         <div class="bg-white shadow-xl rounded-lg overflow-hidden dark:bg-gray-800">
-            {{-- DIV TEMPAT PETA HARUS ADA DI SINI --}}
             <div id="map-admin"></div>
         </div>
     </div>
 @endsection
 
-{{-- 2. PUSH JAVASCRIPT LEAFLET KE BAWAH BODY --}}
 @push('scripts')
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <script>
-        /**
-         * Menyalin teks dari elemen yang diberikan ID ke clipboard.
-         * Menggunakan API Clipboard modern jika tersedia, dengan fallback ke execCommand.
-         * @param {string} elementId ID dari elemen yang berisi teks koordinat.
-         */
         function copyCoordinates(elementId) {
-            // 1. Dapatkan teks koordinat dari elemen span
             const copyText = document.getElementById(elementId)?.textContent;
 
             if (!copyText) {
@@ -81,7 +70,6 @@
                 return;
             }
 
-            // 2. Gunakan API Clipboard modern (lebih aman dan asinkron)
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(copyText).then(() => {
                     // Tampilkan notifikasi sukses
@@ -130,10 +118,24 @@
             const map = L.map('map-admin').setView(defaultPos, 13);
 
             // Tambahkan layer OpenStreetMap
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+            // 1. Layer Gambar Satelit dengan tambahan maxNativeZoom
+            var satelitLayer = L.tileLayer(
+                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    maxZoom: 20,
+                    maxNativeZoom: 17,
+                    attribution: 'Satelit &copy; Esri'
+                });
+
+            // 2. Layer Teks/Label OpenStreetMap (Kode tetap sama seperti sebelumnya)
+            var labelOSMLayer = L.tileLayer(
+                'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+                    maxZoom: 20,
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                });
+
+            // 3. Masukkan ke map
+            satelitLayer.addTo(map);
+            labelOSMLayer.addTo(map);
 
             const aduanData = @json($aduans);
             const markers = [];
