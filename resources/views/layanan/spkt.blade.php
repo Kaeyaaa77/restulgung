@@ -363,14 +363,21 @@
 
             // Inisialisasi peta
             map = L.map('map-user').setView(defaultPos, 13);
+            var satelitLayer = L.tileLayer(
+                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    maxZoom: 20,
+                    maxNativeZoom: 17,
+                    attribution: 'Satelit © Esri'
+                });
+            var labelOSMLayer = L.tileLayer(
+                'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+                    maxZoom: 20,
+                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                });
 
-            // Tambahkan layer OpenStreetMap
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+            satelitLayer.addTo(map);
+            labelOSMLayer.addTo(map);
 
-            // Ambil nilai lama jika ada
             const oldLat = document.getElementById('latitude').value;
             const oldLng = document.getElementById('longitude').value;
 
@@ -380,9 +387,7 @@
                 placeMarker(oldPos, map);
             }
 
-            // Reverse Geocoding menggunakan Nominatim API (layanan OpenStreetMap)
             function reverseGeocode(latLng) {
-                // Perhatikan: Nominatim memiliki batasan penggunaan wajar, jangan gunakan berlebihan
                 const url =
                     `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latLng.lat}&lon=${latLng.lng}&zoom=18&addressdetails=1`;
                 fetch(url)
