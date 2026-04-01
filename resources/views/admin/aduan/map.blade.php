@@ -199,8 +199,7 @@
                                 </div>
                             </div>
                             <div class="mt-4 text-right border-t border-gray-200 pt-2">
-                                <a href="https://www.openstreetmap.org/?mlat=\${aduan.latitude}&mlon=\${aduan.longitude}#map=16/\${aduan.latitude}/\${aduan.longitude}" target="_blank" class="text-blue-500 hover:text-blue-700 text-sm font-medium">Lihat di OSM »</a>
-                                <a href="{{ url('admin/aduan') }}/\${aduan.id}" target="_blank" class="text-yellow-600 hover:text-yellow-700 text-sm font-medium ml-3">Lihat Detail »</a>
+                                <a href="https://www.google.com/maps?q=${aduan.latitude},${aduan.longitude}" target="_blank" class="text-blue-500 hover:text-blue-700 text-sm font-medium">Lihat di Google Maps »</a>
                             </div>
                         </div>
                     `;
