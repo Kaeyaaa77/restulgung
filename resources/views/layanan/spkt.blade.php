@@ -222,8 +222,8 @@
                                 <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
+
                         <div class="grid md:grid-cols-2 gap-6">
-                            {{-- UBAH: Input Lokasi Kejadian dengan Map --}}
                             <div>
                                 <label for="lokasi_kejadian_text"
                                     class="block mb-2 text-sm font-medium text-gray-700">Lokasi
@@ -232,8 +232,6 @@
                                     class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 cursor-default"
                                     placeholder="Gunakan Lokasi Saya atau klik pada peta..."
                                     value="{{ old('lokasi_kejadian') }}" readonly required>
-
-                                {{-- Hidden fields untuk mengirim data koordinat dan alamat yang di-reverse-geocode --}}
                                 <input type="hidden" id="lokasi_kejadian" name="lokasi_kejadian"
                                     value="{{ old('lokasi_kejadian') }}" required>
                                 <input type="hidden" id="latitude" name="latitude" value="{{ old('latitude') }}"
@@ -243,7 +241,6 @@
                             </div>
                         </div>
 
-                        {{-- Map interaktif --}}
                         <div class="mt-4">
                             <button type="button" id="use-my-location"
                                 class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors shadow-md mb-4">
