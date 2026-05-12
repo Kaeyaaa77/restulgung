@@ -87,43 +87,8 @@
                 <div class="w-24 h-1 bg-yellow-400 mx-auto mt-4"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto bg-gray-50 p-8 rounded-lg shadow-lg">
-                <p class="text-gray-700 leading-relaxed mb-6">Setiap kegiatan yang mendatangkan massa dalam jumlah besar
-                    dan berpotensi memerlukan pengamanan wajib mendapatkan izin keramaian dari pihak kepolisian. Hal ini
-                    bertujuan untuk memastikan acara berjalan dengan aman, tertib, dan lancar.</p>
-
-                <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Prosedur Pengajuan</h2>
-                <ol class="list-decimal list-inside space-y-4 text-gray-700">
-                    <li>
-                        <strong>Buat Surat Permohonan:</strong> Ajukan surat permohonan izin yang ditujukan kepada:
-                        <ul class="list-disc list-inside ml-6 mt-2">
-                            <li><strong>Kapolsek Setempat:</strong> Untuk kegiatan skala kecil di tingkat kecamatan.
-                            </li>
-                            <li><strong>Kapolres Tulungagung (c.q. Kasat Intelkam):</strong> Untuk kegiatan skala besar
-                                yang mencakup lebih dari satu kecamatan.</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>Lengkapi Proposal Kegiatan:</strong> Lampirkan proposal yang berisi detail acara
-                        seperti:
-                        <ul class="list-disc list-inside ml-6 mt-2">
-                            <li>Jenis, maksud, dan tujuan acara.</li>
-                            <li>Waktu dan lokasi penyelenggaraan.</li>
-                            <li>Perkiraan jumlah peserta atau penonton.</li>
-                            <li>Identitas penanggung jawab acara.</li>
-                            <li>Rencana pengamanan internal (jika ada).</li>
-                        </ul>
-                    </li>
-                    <li><strong>Sertakan Dokumen Pendukung:</strong> Fotokopi KTP penanggung jawab dan surat izin
-                        penggunaan lokasi dari pemilik tempat.</li>
-                    <li><strong>Waktu Pengajuan:</strong> Ajukan permohonan selambat-lambatnya 7 hari kerja sebelum
-                        acara dilaksanakan untuk proses verifikasi dan asesmen risiko.</li>
-                </ol>
-
-                <div class="mt-8 text-center bg-blue-50 border-t-4 border-blue-500 p-6 rounded-b-lg">
-                    <p class="text-blue-800">Penerbitan Surat Izin Keramaian tidak dipungut biaya. Pihak kepolisian akan
-                        memberikan rekomendasi keamanan berdasarkan skala kegiatan Anda.</p>
-                </div>
+            <div class="max-w-4xl mx-auto">
+                @include('partials.layanan_pdf_viewer', ['layananSlug' => 'izin_keramaian'])
             </div>
         </div>
     </main>

@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController as AdminPasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\NewPasswordController as AdminNewPasswordController;
 use App\Http\Controllers\GeminiChatController;
+use App\Http\Controllers\Admin\LayananContentController;
 
 //RUTE PUBLIK
 Route::get('/', [HomeController::class, 'index'])->name('landing');
@@ -91,6 +92,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/login/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+        Route::resource('layanan-content', LayananContentController::class);
         Route::resource('beritas', BeritaController::class);
         Route::resource('galleries', GalleryController::class);
         Route::get('aduan', [AduanController::class, 'index'])->name('aduan.index');

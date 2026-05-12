@@ -87,32 +87,8 @@
                 <div class="w-24 h-1 bg-yellow-400 mx-auto mt-4"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto bg-gray-50 p-8 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Fungsi dan Kegunaan</h2>
-                <p class="text-gray-700 leading-relaxed mb-6">Layanan sidik jari oleh tim Inafis (Indonesia Automatic
-                    Fingerprint Identification System) umumnya diperlukan sebagai salah satu syarat kelengkapan
-                    administrasi, seperti:</p>
-                <ul class="list-disc list-inside space-y-2 text-gray-700 mb-8">
-                    <li>Pengurusan Surat Keterangan Catatan Kepolisian (SKCK).</li>
-                    <li>Pendaftaran Calon Pegawai Negeri Sipil (CPNS).</li>
-                    <li>Pemberkasan untuk pendaftaran TNI/Polri.</li>
-                    <li>Keperluan lain yang membutuhkan verifikasi identitas resmi.</li>
-                </ul>
-
-                <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Prosedur dan Persyaratan</h2>
-                <ol class="list-decimal list-inside space-y-3 text-gray-700">
-                    <li>Datang langsung ke Unit Identifikasi (Inafis) Satreskrim Polres Tulungagung pada jam kerja.</li>
-                    <li>Membawa fotokopi Kartu Tanda Penduduk (KTP) sebanyak 1 lembar.</li>
-                    <li>Membawa pas foto berwarna ukuran 4x6 sebanyak 2 lembar (latar belakang merah).</li>
-                    <li>Mengisi formulir yang disediakan oleh petugas.</li>
-                    <li>Petugas akan melakukan pengambilan sidik kesepuluh jari Anda menggunakan alat khusus.</li>
-                    <li>Setelah selesai, Anda akan mendapatkan Kartu Rumus Sidik Jari.</li>
-                </ol>
-
-                <div class="mt-8 text-center bg-blue-50 border-t-4 border-blue-500 p-6 rounded-b-lg">
-                    <p class="text-blue-800">Layanan ini umumnya cepat dan dapat ditunggu. Pastikan jari-jari Anda dalam
-                        keadaan bersih untuk hasil yang maksimal.</p>
-                </div>
+            <div class="max-w-4xl mx-auto">
+                @include('partials.layanan_pdf_viewer', ['layananSlug' => 'sidik_jari'])
             </div>
         </div>
     </main>

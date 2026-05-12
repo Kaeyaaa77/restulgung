@@ -87,46 +87,8 @@
                 <div class="w-24 h-1 bg-yellow-400 mx-auto mt-4"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto bg-gray-50 p-8 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Apa itu SP2HP?</h2>
-                <p class="text-gray-700 leading-relaxed mb-6">SP2HP (Surat Pemberitahuan Perkembangan Hasil Penyidikan)
-                    adalah hak bagi pelapor untuk mengetahui sejauh mana perkembangan penanganan perkara yang
-                    dilaporkannya kepada pihak Kepolisian. Layanan ini merupakan bentuk transparansi dan akuntabilitas
-                    Polri dalam proses penyidikan.</p>
-
-                <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Cara Memperoleh SP2HP</h2>
-                <p class="mb-4 text-gray-700">Polres Tulungagung menyediakan beberapa cara untuk mengakses informasi
-                    perkembangan perkara:</p>
-
-                <div class="space-y-4">
-                    <div class="bg-white p-4 border rounded-md">
-                        <strong class="text-gray-800">1. SP2HP Online (e-SP2HP)</strong>
-                        <p class="text-gray-600 text-sm mt-1">Anda dapat mengakses perkembangan perkara secara mandiri
-                            melalui platform online nasional. Anda akan memerlukan Nomor Laporan Polisi (LP) untuk
-                            melakukan pengecekan.</p>
-                        <a href="https://sp2hp.bareskrim.polri.go.id/" target="_blank"
-                            class="text-blue-600 hover:underline mt-2 inline-block">Kunjungi Portal SP2HP Online Polri
-                            →</a>
-                    </div>
-                    <div class="bg-white p-4 border rounded-md">
-                        <strong class="text-gray-800">2. Menghubungi Penyidik</strong>
-                        <p class="text-gray-600 text-sm mt-1">Anda dapat secara proaktif menghubungi penyidik atau unit
-                            yang menangani perkara Anda untuk menanyakan perkembangan secara langsung. Kontak penyidik
-                            biasanya tertera pada Surat Tanda Terima Laporan Polisi (STTLP).</p>
-                    </div>
-                    <div class="bg-white p-4 border rounded-md">
-                        <strong class="text-gray-800">3. Datang Langsung</strong>
-                        <p class="text-gray-600 text-sm mt-1">Anda juga dapat datang ke unit terkait (misalnya
-                            Satreskrim, Satnarkoba, atau Satlantas) di Polres Tulungagung untuk meminta informasi
-                            perkembangan penyidikan kepada petugas.</p>
-                    </div>
-                </div>
-
-                <div class="mt-8 text-center bg-yellow-50 border-t-4 border-yellow-500 p-6 rounded-b-lg">
-                    <p class="text-yellow-800">Setiap pelapor berhak mendapatkan SP2HP. Jika Anda mengalami kesulitan
-                        dalam memperoleh informasi, Anda dapat berkoordinasi dengan Siwas (Seksi Pengawasan) Polres
-                        Tulungagung.</p>
-                </div>
+            <div class="max-w-4xl mx-auto">
+                @include('partials.layanan_pdf_viewer', ['layananSlug' => 'sp2hp'])
             </div>
         </div>
     </main>

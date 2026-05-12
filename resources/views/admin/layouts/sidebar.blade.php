@@ -23,6 +23,14 @@
             Dashboard
         </a>
 
+        {{-- Link Konten Layanan --}}
+        <a href="{{ route('admin.layanan-content.index') }}"
+            class="flex items-center px-4 py-2.5 text-sm rounded-lg transition duration-200
+           {{ request()->routeIs('admin.layanan-content.*') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
+            <span class="material-symbols-outlined mr-3">description</span>
+            Manajemen Layanan
+        </a>
+
         {{-- Link Berita & Informasi --}}
         <a href="{{ route('admin.beritas.index') }}"
             class="flex items-center px-4 py-2.5 text-sm rounded-lg transition duration-200
@@ -60,6 +68,7 @@
             <span class="material-symbols-outlined mr-3">map</span>
             Peta Aduan
         </a>
+
     </nav>
 
     {{-- Bagian User Info & Logout --}}

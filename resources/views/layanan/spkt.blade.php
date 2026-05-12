@@ -100,190 +100,133 @@
                 <div class="w-24 h-1 bg-yellow-400 mx-auto mt-4"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto bg-gray-50 p-8 rounded-lg shadow-lg">
-                <div class="prose max-w-none text-gray-700">
-                    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Apa itu SPKT?</h2>
-                    <p>SPKT (Sentra Pelayanan Kepolisian Terpadu) adalah pusat pelayanan terdepan Kepolisian yang
-                        bertugas memberikan pelayanan kepada masyarakat dalam bentuk penerimaan Laporan Polisi (LP),
-                        Surat Tanda Terima Laporan Polisi (STTLP), dan pengaduan lainnya. SPKT merupakan gerbang utama
-                        bagi masyarakat yang membutuhkan bantuan kepolisian.</p>
+            <div class="max-w-4xl mx-auto">
+                @include('partials.layanan_pdf_viewer', ['layananSlug' => 'spkt'])
+            </div>
 
-                    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4 mt-8">Visi dan Misi</h2>
-                    <h3 class="font-bold text-lg text-gray-800">Visi</h3>
-                    <p>"Terwujudnya pelayanan prima guna mendukung supremasi hukum dalam rangka menciptakan Kamtibmas
-                        yang kondusif."</p>
-
-                    <h3 class="font-bold text-lg text-gray-800 mt-4">Misi</h3>
-                    <ol class="list-decimal list-inside space-y-2 mt-2">
-                        <li>Memberikan pelayanan Kepolisian kepada masyarakat secara mudah, cepat, tepat, transparan,
-                            dan akuntabel.</li>
-                        <li>Meningkatkan kualitas sumber daya manusia SPKT yang profesional, modern, dan terpercaya.
-                        </li>
-                        <li>Mengoptimalkan pemanfaatan teknologi informasi dalam menunjang pelayanan Kepolisian.</li>
-                        <li>Membangun kemitraan dengan masyarakat dan instansi terkait dalam rangka pemeliharaan
-                            Kamtibmas.</li>
-                    </ol>
-
-                    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4 mt-8">Produk Layanan</h2>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>Penerimaan Laporan Polisi (LP).</li>
-                        <li>Penerimaan Laporan Kehilangan Barang/Surat.</li>
-                        <li>Penerimaan Pengaduan Masyarakat.</li>
-                        <li>Pemberian Surat Tanda Terima Laporan Polisi (STTLP).</li>
-                        <li>Penanganan pertama Tempat Kejadian Perkara (TPTKP) untuk kasus ringan.</li>
-                    </ul>
-
-                    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4 mt-8">Persyaratan Pelayanan</h2>
-                    <p>Untuk membuat laporan, masyarakat diharapkan membawa:</p>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>Identitas diri pelapor (KTP/SIM/Paspor).</li>
-                        <li>Data terlapor (jika ada/diketahui).</li>
-                        <li>Bukti-bukti awal yang relevan dengan perkara yang dilaporkan (jika ada).</li>
-                        <li>Mengetahui kronologis singkat kejadian.</li>
-                    </ul>
-
-                    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4 mt-8">Mekanisme Pelayanan</h2>
-                    <ol class="list-decimal list-inside space-y-3">
-                        <li>Pelapor datang ke ruang SPKT Polres Tulungagung.</li>
-                        <li>Petugas SPKT menyambut dan menanyakan keperluan pelapor.</li>
-                        <li>Pelapor menyampaikan maksud dan tujuan serta menjelaskan kronologi kejadian.</li>
-                        <li>Petugas melakukan wawancara singkat untuk melengkapi informasi.</li>
-                        <li>Petugas membuatkan Laporan Polisi (LP) atau Surat Tanda Terima Laporan (STTL) sesuai jenis
-                            laporan.</li>
-                        <li>Pelapor menandatangani laporan yang telah dibuat.</li>
-                        <li>Petugas menyerahkan salinan STTLP kepada pelapor sebagai bukti lapor.</li>
-                    </ol>
-
-                    <div class="mt-8 text-center bg-blue-50 border-t-4 border-blue-500 p-6 rounded-b-lg">
-                        <p class="font-bold text-blue-800">Seluruh proses pelayanan di SPKT tidak dipungut biaya
-                            (GRATIS).</p>
-                    </div>
+            <div id="form-aduan" class="mt-16 pt-8 border-t-2 border-gray-200">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 uppercase">Form Aduan Online</h2>
+                    <p class="text-gray-500 mt-2">Sampaikan kritik, saran, atau laporan Anda secara online.</p>
                 </div>
 
-                <div id="form-aduan" class="mt-16 pt-8 border-t-2 border-gray-200">
-                    <div class="text-center mb-8">
-                        <h2 class="text-3xl font-bold text-gray-800 uppercase">Form Aduan Online</h2>
-                        <p class="text-gray-500 mt-2">Sampaikan kritik, saran, atau laporan Anda secara online.</p>
+                @if (session('success'))
+                    <div class="mb-6 p-4 text-sm text-green-800 bg-green-100 rounded-lg text-center" role="alert">
+                        <span class="font-medium">Berhasil!</span> {{ session('success') }}
+                    </div>
+                @endif
+
+                <form action="{{ route('layanan.aduan.store') }}" method="POST" enctype="multipart/form-data"
+                    class="space-y-6">
+                    @csrf
+                    <div>
+                        <label for="nama" class="block mb-2 text-sm font-medium text-gray-700">Nama
+                            Pelapor</label>
+                        <input type="text" id="nama" name="nama" value="{{ old('nama') }}"
+                            class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5"
+                            required>
+                        @error('nama')
+                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    @if (session('success'))
-                        <div class="mb-6 p-4 text-sm text-green-800 bg-green-100 rounded-lg text-center" role="alert">
-                            <span class="font-medium">Berhasil!</span> {{ session('success') }}
-                        </div>
-                    @endif
+                    <div>
+                        <label for="jenis_aduan" class="block mb-2 text-sm font-medium text-gray-700">Jenis
+                            Aduan</label>
+                        <input type="text" id="jenis_aduan" name="jenis_aduan" value="{{ old('jenis_aduan') }}"
+                            class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5"
+                            placeholder="Contoh: Kehilangan Barang, Tindak Kriminal, dll." required>
+                        @error('jenis_aduan')
+                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                    <form action="{{ route('layanan.aduan.store') }}" method="POST" enctype="multipart/form-data"
-                        class="space-y-6">
-                        @csrf
+                    <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <label for="nama" class="block mb-2 text-sm font-medium text-gray-700">Nama
-                                Pelapor</label>
-                            <input type="text" id="nama" name="nama" value="{{ old('nama') }}"
+                            <label for="waktu_kejadian" class="block mb-2 text-sm font-medium text-gray-700">Waktu
+                                Kejadian</label>
+                            <input type="datetime-local" id="waktu_kejadian" name="waktu_kejadian"
+                                value="{{ old('waktu_kejadian') }}"
                                 class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5"
                                 required>
-                            @error('nama')
+                            @error('waktu_kejadian')
                                 <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
+                    </div>
 
+                    <div>
+                        <label for="isi_laporan" class="block mb-2 text-sm font-medium text-gray-700">Isi Laporan
+                            / Kronologi</label>
+                        <textarea id="isi_laporan" name="isi_laporan" rows="5"
+                            class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5"
+                            required>{{ old('isi_laporan') }}</textarea>
+                        @error('isi_laporan')
+                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <label for="jenis_aduan" class="block mb-2 text-sm font-medium text-gray-700">Jenis
-                                Aduan</label>
-                            <input type="text" id="jenis_aduan" name="jenis_aduan"
-                                value="{{ old('jenis_aduan') }}"
-                                class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5"
-                                placeholder="Contoh: Kehilangan Barang, Tindak Kriminal, dll." required>
-                            @error('jenis_aduan')
-                                <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                            @enderror
+                            <label for="lokasi_kejadian_text"
+                                class="block mb-2 text-sm font-medium text-gray-700">Lokasi
+                                Kejadian</label>
+                            <input type="text" id="lokasi_kejadian_text"
+                                class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 cursor-default"
+                                placeholder="Gunakan Lokasi Saya atau klik pada peta..."
+                                value="{{ old('lokasi_kejadian') }}" readonly required>
+                            <input type="hidden" id="lokasi_kejadian" name="lokasi_kejadian"
+                                value="{{ old('lokasi_kejadian') }}" required>
+                            <input type="hidden" id="latitude" name="latitude" value="{{ old('latitude') }}"
+                                required>
+                            <input type="hidden" id="longitude" name="longitude" value="{{ old('longitude') }}"
+                                required>
                         </div>
+                    </div>
 
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="waktu_kejadian" class="block mb-2 text-sm font-medium text-gray-700">Waktu
-                                    Kejadian</label>
-                                <input type="datetime-local" id="waktu_kejadian" name="waktu_kejadian"
-                                    value="{{ old('waktu_kejadian') }}"
-                                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5"
-                                    required>
-                                @error('waktu_kejadian')
-                                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
+                    <div class="mt-4">
+                        <button type="button" id="use-my-location"
+                            class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors shadow-md mb-4">
+                            <i class="fas fa-crosshairs mr-2"></i> Gunakan Lokasi Saya Sekarang
+                        </button>
+                        <div id="map-user"></div>
+                        <p class="mt-2 text-xs text-gray-500">
+                            <i class="fas fa-info-circle mr-1"></i> Klik pada peta atau seret marker untuk menandai
+                            lokasi kejadian.
+                        </p>
+                        @error('latitude')
+                            <p class="mt-1 text-xs text-red-500">Lokasi kejadian wajib ditandai pada peta.</p>
+                        @enderror
+                    </div>
 
-                        <div>
-                            <label for="isi_laporan" class="block mb-2 text-sm font-medium text-gray-700">Isi Laporan
-                                / Kronologi</label>
-                            <textarea id="isi_laporan" name="isi_laporan" rows="5"
-                                class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5"
-                                required>{{ old('isi_laporan') }}</textarea>
-                            @error('isi_laporan')
-                                <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                            @enderror
-                        </div>
+                    <div>
+                        <label for="bukti" class="block mb-2 text-sm font-medium text-gray-700">Upload Bukti
+                            (Opsional)</label>
+                        <input type="file" id="bukti" name="bukti"
+                            class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-yellow-100 file:text-yellow-700 hover:file:bg-yellow-200">
+                        <p class="mt-1 text-xs text-gray-500">Format: JPG, PNG, PDF. Maksimal 2MB.</p>
+                        @error('bukti')
+                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="lokasi_kejadian_text"
-                                    class="block mb-2 text-sm font-medium text-gray-700">Lokasi
-                                    Kejadian</label>
-                                <input type="text" id="lokasi_kejadian_text"
-                                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 cursor-default"
-                                    placeholder="Gunakan Lokasi Saya atau klik pada peta..."
-                                    value="{{ old('lokasi_kejadian') }}" readonly required>
-                                <input type="hidden" id="lokasi_kejadian" name="lokasi_kejadian"
-                                    value="{{ old('lokasi_kejadian') }}" required>
-                                <input type="hidden" id="latitude" name="latitude" value="{{ old('latitude') }}"
-                                    required>
-                                <input type="hidden" id="longitude" name="longitude"
-                                    value="{{ old('longitude') }}" required>
-                            </div>
-                        </div>
-
-                        <div class="mt-4">
-                            <button type="button" id="use-my-location"
-                                class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors shadow-md mb-4">
-                                <i class="fas fa-crosshairs mr-2"></i> Gunakan Lokasi Saya Sekarang
-                            </button>
-                            <div id="map-user"></div>
-                            <p class="mt-2 text-xs text-gray-500">
-                                <i class="fas fa-info-circle mr-1"></i> Klik pada peta atau seret marker untuk menandai
-                                lokasi kejadian.
-                            </p>
-                            @error('latitude')
-                                <p class="mt-1 text-xs text-red-500">Lokasi kejadian wajib ditandai pada peta.</p>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <label for="bukti" class="block mb-2 text-sm font-medium text-gray-700">Upload Bukti
-                                (Opsional)</label>
-                            <input type="file" id="bukti" name="bukti"
-                                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-yellow-100 file:text-yellow-700 hover:file:bg-yellow-200">
-                            <p class="mt-1 text-xs text-gray-500">Format: JPG, PNG, PDF. Maksimal 2MB.</p>
-                            @error('bukti')
-                                <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="text-right">
-                            <button type="submit"
-                                class="bg-yellow-500 text-black font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors shadow-lg">
-                                Kirim Laporan
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                {{-- PENAMBAHAN BAGIAN CALL CENTER --}}
-                <div class="mt-12 text-center bg-red-50 border-t-4 border-red-500 p-6 rounded-lg">
-                    <p class="font-bold text-red-800">UNTUK KEADAAN DARURAT, SEGERA HUBUNGI:</p>
-                    <p class="text-4xl font-bold text-red-700 mt-2">CALL CENTER POLRI 110</p>
-                    <p class="text-red-700 mt-1">Layanan 24 Jam Bebas Pulsa</p>
-                </div>
-
+                    <div class="text-right">
+                        <button type="submit"
+                            class="bg-yellow-500 text-black font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors shadow-lg">
+                            Kirim Laporan
+                        </button>
+                    </div>
+                </form>
             </div>
+
+            {{-- PENAMBAHAN BAGIAN CALL CENTER --}}
+            <div class="mt-12 text-center bg-red-50 border-t-4 border-red-500 p-6 rounded-lg">
+                <p class="font-bold text-red-800">UNTUK KEADAAN DARURAT, SEGERA HUBUNGI:</p>
+                <p class="text-4xl font-bold text-red-700 mt-2">CALL CENTER POLRI 110</p>
+                <p class="text-red-700 mt-1">Layanan 24 Jam Bebas Pulsa</p>
+            </div>
+
+        </div>
         </div>
     </main>
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,13 +15,15 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+
         /* Gaya untuk gambar latar belakang hero */
         .hero-bg {
             /* Ganti dengan URL gambar latar belakang Anda */
-            background-image: url("https://placehold.co/1920x1080/000000/FFFFFF?text=Gedung+Polres"); 
+            background-image: url("https://placehold.co/1920x1080/000000/FFFFFF?text=Gedung+Polres");
         }
     </style>
 </head>
+
 <body class="bg-gray-100">
 
     <!-- Header Utama -->
@@ -79,7 +82,9 @@
                 <!-- Card 1: BPKB & STNK -->
                 <div class="bg-gray-50 p-8 rounded-lg text-center shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
                     <div class="w-24 h-24 bg-yellow-100 rounded-full mx-auto flex items-center justify-center mb-6">
-                        <svg class="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+                        <svg class="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                        </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800">BPKB & STNK</h3>
                     <p class="text-gray-500 mt-2 flex-grow">Informasi lengkap mengenai prosedur pengurusan BPKB dan STNK kendaraan bermotor.</p>
@@ -89,7 +94,12 @@
                 <!-- Card 2: Layanan SIM -->
                 <div class="bg-gray-50 p-8 rounded-lg text-center shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
                     <div class="w-24 h-24 bg-yellow-100 rounded-full mx-auto flex items-center justify-center mb-6">
-                        <svg class="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 12.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M3.863 20.425a18.02 18.02 0 0 1 16.274 0" /><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12c0-5.03 4.48-9 9.75-9s9.75 3.97 9.75 9c0 5.03-4.48 9-9.75 9s-9.75-3.97-9.75-9Z" /></svg>
+                        <svg class="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 12.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.863 20.425a18.02 18.02 0 0 1 16.274 0" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12c0-5.03 4.48-9 9.75-9s9.75 3.97 9.75 9c0 5.03-4.48 9-9.75 9s-9.75-3.97-9.75-9Z" />
+                        </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800">Layanan SIM</h3>
                     <p class="text-gray-500 mt-2 flex-grow">Prosedur pembuatan baru dan perpanjangan Surat Izin Mengemudi (SIM).</p>
@@ -99,17 +109,21 @@
                 <!-- Card 3: Layanan SKCK -->
                 <div class="bg-gray-50 p-8 rounded-lg text-center shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
                     <div class="w-24 h-24 bg-yellow-100 rounded-full mx-auto flex items-center justify-center mb-6">
-                        <svg class="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                        <svg class="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800">Layanan SKCK</h3>
                     <p class="text-gray-500 mt-2 flex-grow">Syarat dan alur pembuatan Surat Keterangan Catatan Kepolisian (SKCK).</p>
                     <a href="#" class="bg-yellow-400 text-gray-900 font-semibold py-2 px-5 rounded-lg mt-6 hover:bg-yellow-500 transition-colors">Selengkapnya</a>
                 </div>
-                
+
                 <!-- Card 4: Pengawalan -->
                 <div class="bg-gray-50 p-8 rounded-lg text-center shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
                     <div class="w-24 h-24 bg-yellow-100 rounded-full mx-auto flex items-center justify-center mb-6">
-                        <svg class="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286Z" /></svg>
+                        <svg class="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286Z" />
+                        </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800">Pengawalan</h3>
                     <p class="text-gray-500 mt-2 flex-grow">Prosedur untuk mengajukan permohonan pengawalan jalan raya oleh petugas.</p>
@@ -119,7 +133,9 @@
                 <!-- Card 5: Izin Keramaian -->
                 <div class="bg-gray-50 p-8 rounded-lg text-center shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
                     <div class="w-24 h-24 bg-yellow-100 rounded-full mx-auto flex items-center justify-center mb-6">
-                        <svg class="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.962A3.75 3.75 0 0 1 9 10.5V9A4.5 4.5 0 0 1 13.5 4.5v.75m-6.75 6.75a3.75 3.75 0 0 0-3.75-3.75V9a4.5 4.5 0 0 0 4.5-4.5v.75m10.5 6.75a3.75 3.75 0 0 0-3.75-3.75V9a4.5 4.5 0 0 0 4.5-4.5v.75M9 12.75a3.75 3.75 0 0 0-3.75 3.75v.75m3.75-4.5a3.75 3.75 0 0 1 3.75 3.75v.75m-3.75-4.5a3.75 3.75 0 0 0 3.75 3.75v.75M9 15v.75A3.75 3.75 0 0 0 12.75 19.5h.75" /></svg>
+                        <svg class="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.962A3.75 3.75 0 0 1 9 10.5V9A4.5 4.5 0 0 1 13.5 4.5v.75m-6.75 6.75a3.75 3.75 0 0 0-3.75-3.75V9a4.5 4.5 0 0 0 4.5-4.5v.75m10.5 6.75a3.75 3.75 0 0 0-3.75-3.75V9a4.5 4.5 0 0 0 4.5-4.5v.75M9 12.75a3.75 3.75 0 0 0-3.75 3.75v.75m3.75-4.5a3.75 3.75 0 0 1 3.75 3.75v.75m-3.75-4.5a3.75 3.75 0 0 0 3.75 3.75v.75M9 15v.75A3.75 3.75 0 0 0 12.75 19.5h.75" />
+                        </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800">Izin Keramaian</h3>
                     <p class="text-gray-500 mt-2 flex-grow">Informasi dan prosedur untuk mendapatkan izin penyelenggaraan acara keramaian.</p>
@@ -129,7 +145,9 @@
                 <!-- Card 6: Besuk Tahanan -->
                 <div class="bg-gray-50 p-8 rounded-lg text-center shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
                     <div class="w-24 h-24 bg-yellow-100 rounded-full mx-auto flex items-center justify-center mb-6">
-                        <svg class="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
+                        <svg class="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                        </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800">Besuk Tahanan</h3>
                     <p class="text-gray-500 mt-2 flex-grow">Jadwal dan tata tertib serta prosedur untuk melakukan kunjungan besuk tahanan.</p>
@@ -143,9 +161,10 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto text-center">
-            <p>&copy; 2024 Kepolisian Resor Tulungagung. Semua Hak Dilindungi.</p>
+            <p>&copy; 2026 Kepolisian Resor Tulungagung. Semua Hak Dilindungi.</p>
         </div>
     </footer>
 
 </body>
+
 </html>

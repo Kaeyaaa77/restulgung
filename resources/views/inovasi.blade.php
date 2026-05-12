@@ -266,7 +266,8 @@
                             <li><a href="{{ url('/') }}" class="hover:text-yellow-400">Beranda</a></li>
                             <li><a href="{{ route('profil.publik') }}" class="hover:text-yellow-400">Profil</a></li>
                             <li><a href="{{ route('inovasi.index') }}" class="hover:text-yellow-400">Inovasi</a></li>
-                            <li><a href="{{ route('faq.index') }}" class="hover:text-yellow-400">FAQ</a></li>
+                            <li><a href="{{ route('faq.index') }}" class="hover:text-yellow-400">Layanan
+                                    Informasi</a></li>
                         </ul>
                     </div>
                     <div>
@@ -301,7 +302,7 @@
                     </div>
                 </div>
                 <div class="text-center text-xs text-gray-500">
-                    © 2025 Kepolisian Resor Tulungagung. Semua Hak Cipta Dilindungi.
+                    © 2026 Kepolisian Resor Tulungagung. Semua Hak Cipta Dilindungi.
                 </div>
             </div>
         </footer>

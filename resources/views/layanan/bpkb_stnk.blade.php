@@ -94,37 +94,8 @@
                 <div class="w-24 h-1 bg-yellow-400 mx-auto mt-4"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-                <div class="bg-gray-50 p-8 rounded-lg shadow-lg" data-aos="fade-right">
-                    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Pengurusan STNK</h2>
-                    <p class="text-gray-600 mb-4">Layanan ini meliputi perpanjangan STNK tahunan, 5 tahunan (ganti
-                        plat), dan balik nama.</p>
-                    <strong class="text-gray-800">Persyaratan Umum:</strong>
-                    <ul class="list-disc list-inside space-y-2 mt-2 text-gray-700">
-                        <li>KTP asli dan fotokopi pemilik kendaraan.</li>
-                        <li>STNK asli dan fotokopi.</li>
-                        <li>BPKB asli dan fotokopi (untuk perpanjangan 5 tahunan & balik nama).</li>
-                        <li>Hasil cek fisik kendaraan (untuk perpanjangan 5 tahunan & balik nama).</li>
-                        <li>Kuitansi jual beli bermaterai (untuk balik nama).</li>
-                    </ul>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-lg shadow-lg" data-aos="fade-left">
-                    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Pengurusan BPKB</h2>
-                    <p class="text-gray-600 mb-4">Layanan ini meliputi penerbitan BPKB baru, balik nama, atau duplikat
-                        karena hilang/rusak.</p>
-                    <strong class="text-gray-800">Persyaratan Umum Balik Nama BPKB:</strong>
-                    <ul class="list-disc list-inside space-y-2 mt-2 text-gray-700">
-                        <li>Fotokopi KTP pemilik baru.</li>
-                        <li>BPKB asli.</li>
-                        <li>STNK asli (yang sudah dibalik nama).</li>
-                        <li>Fotokopi hasil cek fisik kendaraan.</li>
-                        <li>Fotokopi kuitansi pembelian.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="text-center mt-10 bg-blue-50 border-t-4 border-blue-500 p-6 rounded-b-lg max-w-4xl mx-auto">
-                <p class="text-blue-800">Untuk informasi lebih detail mengenai biaya dan alur spesifik, silakan kunjungi
-                    kantor SAMSAT Tulungagung.</p>
+            <div class="max-w-4xl mx-auto">
+                @include('partials.layanan_pdf_viewer', ['layananSlug' => 'bpkb_stnk'])
             </div>
         </div>
     </main>

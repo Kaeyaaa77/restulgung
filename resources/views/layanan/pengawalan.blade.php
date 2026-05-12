@@ -87,38 +87,8 @@
                 <div class="w-24 h-1 bg-yellow-400 mx-auto mt-4"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto bg-gray-50 p-8 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Ketentuan Pengawalan</h2>
-                <p class="text-gray-700 leading-relaxed mb-6">Polri memberikan layanan pengawalan untuk kepentingan
-                    tertentu yang bersifat prioritas dan darurat sesuai dengan Undang-Undang No. 22 Tahun 2009 tentang
-                    Lalu Lintas dan Angkutan Jalan.</p>
-
-                <strong class="text-gray-800">Objek yang Dapat Dikawal:</strong>
-                <ul class="list-disc list-inside space-y-2 mt-2 text-gray-700 mb-6">
-                    <li>Kendaraan pemadam kebakaran yang sedang melaksanakan tugas.</li>
-                    <li>Ambulans yang mengangkut orang sakit.</li>
-                    <li>Kendaraan untuk memberikan pertolongan pada kecelakaan lalu lintas.</li>
-                    <li>Kendaraan pimpinan Lembaga Negara Republik Indonesia.</li>
-                    <li>Kendaraan pimpinan dan pejabat negara asing serta lembaga internasional.</li>
-                    <li>Iring-iringan pengantar jenazah.</li>
-                    <li>Konvoi dan/atau kendaraan untuk kepentingan tertentu menurut pertimbangan petugas Polri.</li>
-                </ul>
-
-                <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Prosedur Permohonan</h2>
-                <ol class="list-decimal list-inside space-y-3 text-gray-700">
-                    <li>Ajukan surat permohonan resmi kepada <strong>Kapolres Tulungagung c.q. Kasat Lantas</strong>.
-                    </li>
-                    <li>Surat diajukan minimal 3 hari kerja sebelum pelaksanaan.</li>
-                    <li>Jelaskan secara detail maksud, tujuan, rute, serta waktu pelaksanaan pengawalan.</li>
-                    <li>Lampirkan fotokopi KTP pemohon/penanggung jawab.</li>
-                    <li>Petugas akan melakukan asesmen untuk menentukan urgensi dan kelayakan permohonan.</li>
-                </ol>
-
-                <div class="mt-8 text-center bg-red-50 border-t-4 border-red-500 p-6 rounded-b-lg">
-                    <p class="font-bold text-red-800">Layanan pengawalan resmi dari Kepolisian TIDAK DIPUNGUT BIAYA
-                        (GRATIS).</p>
-                    <p class="text-red-700 mt-1">Waspadai oknum yang meminta imbalan atas layanan ini.</p>
-                </div>
+            <div class="max-w-4xl mx-auto">
+                @include('partials.layanan_pdf_viewer', ['layananSlug' => 'pengawalan'])
             </div>
         </div>
     </main>

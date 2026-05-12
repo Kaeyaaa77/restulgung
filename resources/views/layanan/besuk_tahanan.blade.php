@@ -87,46 +87,8 @@
                 <div class="w-24 h-1 bg-yellow-400 mx-auto mt-4"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-start">
-                <div class="bg-gray-50 p-8 rounded-lg shadow-lg" data-aos="fade-up">
-                    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Jadwal Kunjungan</h2>
-                    <table class="w-full text-left text-gray-700">
-                        <thead>
-                            <tr class="bg-gray-200">
-                                <th class="p-3">Hari</th>
-                                <th class="p-3">Waktu</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b">
-                                <td class="p-3 font-medium">Selasa</td>
-                                <td class="p-3">09.00 - 14.00 WIB</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="p-3 font-medium">Kamis</td>
-                                <td class="p-3">09.00 - 14.00 WIB</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p class="text-sm mt-4 text-gray-500">*Jadwal dapat berubah sewaktu-waktu. Harap konfirmasi terlebih
-                        dahulu.</p>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="100">
-                    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Aturan Pengunjung</h2>
-                    <ul class="list-disc list-inside space-y-2 text-gray-700">
-                        <li>Pengunjung adalah keluarga inti (ayah, ibu, istri/suami, anak) atau penasihat hukum.</li>
-                        <li>Wajib membawa dan menunjukkan KTP/identitas diri asli.</li>
-                        <li>Berpakaian sopan dan rapi.</li>
-                        <li>Dilarang membawa senjata tajam, narkoba, minuman keras, dan barang berbahaya lainnya.</li>
-                        <li>Makanan dan barang bawaan akan diperiksa oleh petugas.</li>
-                        <li>Dilarang membawa alat komunikasi (handphone) ke dalam ruang besuk.</li>
-                        <li>Mengikuti arahan dan petunjuk dari petugas jaga tahanan.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-8 text-center bg-yellow-50 border-t-4 border-yellow-500 p-6 rounded-b-lg max-w-4xl mx-auto">
-                <p class="text-yellow-800">Pelanggaran terhadap tata tertib akan dikenakan sanksi sesuai peraturan yang
-                    berlaku.</p>
+            <div class="max-w-4xl mx-auto">
+                @include('partials.layanan_pdf_viewer', ['layananSlug' => 'besuk_tahanan'])
             </div>
         </div>
     </main>

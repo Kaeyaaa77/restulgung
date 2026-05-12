@@ -87,33 +87,8 @@
                 <div class="w-24 h-1 bg-yellow-400 mx-auto mt-4"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto bg-gray-50 p-8 rounded-lg shadow-lg">
-                <div class="text-gray-700 leading-relaxed">
-                    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Prinsip Pelaporan</h2>
-                    <p class="mb-4">Laporkan praktik Korupsi, Kolusi, Nepotisme (KKN), gratifikasi, atau pelayanan
-                        publik yang tidak sesuai prosedur oleh personel Polres Tulungagung.</p>
-                    <p class="font-semibold mb-4">Agar laporan Anda mudah ditindaklanjuti, pastikan memenuhi unsur
-                        5W+1H:</p>
-                    <ul class="list-none space-y-3 mb-6">
-                        <li class="flex items-start"><span class="font-bold text-yellow-600 w-20">What</span>: Perbuatan
-                            berindikasi pelanggaran yang diketahui.</li>
-                        <li class="flex items-start"><span class="font-bold text-yellow-600 w-20">Where</span>: Di mana
-                            lokasi perbuatan tersebut dilakukan.</li>
-                        <li class="flex items-start"><span class="font-bold text-yellow-600 w-20">When</span>: Kapan
-                            waktu perbuatan tersebut berlangsung.</li>
-                        <li class="flex items-start"><span class="font-bold text-yellow-600 w-20">Who</span>: Siapa saja
-                            oknum yang terlibat.</li>
-                        <li class="flex items-start"><span class="font-bold text-yellow-600 w-20">How</span>: Bagaimana
-                            modus atau cara perbuatan itu dilakukan.</li>
-                    </ul>
-                    <p class="text-center italic mb-6">"Kami menjamin kerahasiaan identitas Anda sebagai whistleblower.
-                        Fokus kami adalah pada substansi informasi yang Anda laporkan."</p>
-                    <div class="mt-8 text-center bg-yellow-100 border-t-4 border-yellow-500 p-6 rounded-b-lg">
-                        <h3 class="text-xl font-bold text-gray-800">Saluran Pengaduan Resmi</h3>
-                        <p class="mt-2 text-gray-600">Laporkan melalui WhatsApp SiPropam Polres Tulungagung:</p>
-                        <p class="mt-2 text-3xl font-bold text-black tracking-wider">0895-3648-87717</p>
-                    </div>
-                </div>
+            <div class="max-w-4xl mx-auto">
+                @include('partials.layanan_pdf_viewer', ['layananSlug' => 'pengaduan'])
             </div>
         </div>
     </main>
