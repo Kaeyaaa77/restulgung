@@ -8,73 +8,92 @@ use Illuminate\Support\Facades\Log;
 
 class GeminiChatController extends Controller
 {
+    /**
+     * Mengambil teks system instruction dari file eksternal.
+     * Ini memudahkan pengeditan tanpa harus menyentuh logika controller.
+     */
+    private function getSystemInstruction(): string
+    {
+        $path = resource_path('ai/gayatri_knowledge.txt');
+
+        if (file_exists($path)) {
+            return file_get_contents($path);
+        }
+
+        // Fallback jika file tidak ditemukan
+        return "Anda adalah Gayatri AI, asisten Polres Tulungagung. Jawab hanya pertanyaan terkait kepolisian.";
+    }
+
     public function generateContent(Request $request)
     {
         $apiKey = config('services.gemini.api_key');
         if (!$apiKey) {
             Log::error('GEMINI_API_KEY is not set in the .env file.');
-            return response()->json(['reply' => 'Maaf, layanan Chatbot tidak dikonfigurasi dengan benar (API Key hilang).'], 500);
+            return response()->json([
+                'reply' => 'Maaf, layanan Chatbot tidak dikonfigurasi dengan benar (API Key hilang).'
+            ], 500);
         }
-        if (!env('GEMINI_API_KEY')) {
-            Log::error('GEMINI_API_KEY is not set in the .env file.');
-            return response()->json(['reply' => 'Maaf, layanan Chatbot tidak dikonfigurasi dengan benar (API Key hilang).'], 500);
-        }
-        $userMessage = $request->input('message');
-        $chatHistory = $request->input('history', []);
-        $systemInstructionText = "PERINTAH TEGAS: Anda adalah 'Gayatri AI', asisten AI resmi Polres Tulungagung. Peran Anda HANYA menjawab pertanyaan seputar kepolisian, layanan Polres Tulungagung (SKCK, SIM, aduan, dll), dan informasi terkait. JANGAN PERNAH menjawab pertanyaan di luar topik ini (misal: resep, cuaca, politik, sejarah, koding, dll).
-        ATURAN RESPON:
-        1.  Jika pertanyaan relevan dengan topik kepolisian/Polres Tulungagung: Jawab dengan ramah, profesional, dan informatif dalam Bahasa Indonesia.
-        2.  Jika pertanyaan TIDAK relevAN (di luar topik): Jawab HANYA dengan kalimat ini dan tidak boleh ada tambahan lain: 'Mohon maaf, pertanyaan Anda di luar lingkup layanan kami. Silakan hubungi nomor darurat polisi 101 untuk bantuan lebih lanjut.'
-        Ini adalah aturan mutlak. Jangan melanggar.";
 
+        $userMessage   = $request->input('message');
+        $chatHistory   = $request->input('history', []);
+        $systemText    = $this->getSystemInstruction();
+
+        // Priming: system instruction disuntikkan sebagai giliran pertama
         $primingMessages = [
             [
-                'role' => 'user',
-                'parts' => [['text' => $systemInstructionText]]
+                'role'  => 'user',
+                'parts' => [['text' => $systemText]],
             ],
             [
-                'role' => 'model',
-                'parts' => [['text' => 'Saya mengerti. Saya adalah Gayatri AI dan hanya akan menjawab pertanyaan seputar Polres Tulungagung.']]
-            ]
+                'role'  => 'model',
+                'parts' => [['text' => 'Saya mengerti. Saya adalah GAYATRI AI, asisten resmi Polres Tulungagung. Saya siap membantu dengan informasi lengkap seputar layanan dan prosedur kepolisian.']],
+            ],
         ];
 
-        $historyMessages = collect($chatHistory)->map(function ($message) {
-            return [
-                'role' => $message['role'],
-                'parts' => [['text' => $message['text']]]
-            ];
-        })->toArray();
+        $historyMessages = collect($chatHistory)->map(fn($m) => [
+            'role'  => $m['role'],
+            'parts' => [['text' => $m['text']]],
+        ])->toArray();
 
         $newUserMessage = [
-            'role' => 'user',
-            'parts' => [['text' => $userMessage]]
+            'role'  => 'user',
+            'parts' => [['text' => $userMessage]],
         ];
 
-        $contents = array_merge(
-            $primingMessages,
-            $historyMessages,
-            [$newUserMessage]
-        );
+        $contents = array_merge($primingMessages, $historyMessages, [$newUserMessage]);
 
         try {
-            $response = Http::timeout(30)->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=' . env('GEMINI_API_KEY'), [
-                'contents' => $contents,
-
-                'generationConfig' => [
-                    'temperature' => 0.7,
-                ],
-            ]);
+            $response = Http::timeout(30)->post(
+                'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=' . $apiKey,
+                [
+                    'contents'         => $contents,
+                    'generationConfig' => [
+                        'temperature'     => 0.4, // Lebih rendah = lebih konsisten & faktual
+                        'maxOutputTokens' => 2048,
+                    ],
+                ]
+            );
 
             if ($response->successful()) {
-                $text = $response->json('candidates.0.content.parts.0.text', 'Terjadi kesalahan saat memproses jawaban dari AI.');
+                $text = $response->json(
+                    'candidates.0.content.parts.0.text',
+                    'Terjadi kesalahan saat memproses jawaban dari AI.'
+                );
                 return response()->json(['reply' => $text]);
             }
 
-            Log::error('Gemini API Call Failed', ['status' => $response->status(), 'body' => $response->body()]);
-            return response()->json(['reply' => 'Maaf, terjadi kesalahan pada layanan AI. Status: ' . $response->status()], 500);
+            Log::error('Gemini API Call Failed', [
+                'status' => $response->status(),
+                'body'   => $response->body(),
+            ]);
+            return response()->json([
+                'reply' => 'Maaf, terjadi kesalahan pada layanan AI. Status: ' . $response->status()
+            ], 500);
         } catch (\Exception $e) {
             Log::error('Chat Request Exception: ' . $e->getMessage());
-            return response()->json(['reply' => 'Maaf, layanan chat sedang tidak tersedia karena masalah server.'], 500);
+            return response()->json([
+                'reply' => 'Maaf, layanan chat sedang tidak tersedia karena masalah server.'
+            ], 500);
         }
     }
 }

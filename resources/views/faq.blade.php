@@ -24,9 +24,6 @@
         body {
             -ms-overflow-style: none;
             scrollbar-width: none;
-        }
-
-        body {
             padding-top: 116px;
         }
 
@@ -41,11 +38,130 @@
             height: 32px;
             object-fit: cover;
             border-radius: 9999px;
+            flex-shrink: 0;
+        }
+
+        /* Bubble pesan AI */
+        .chat-bubble-ai {
+            background-color: #f3f4f6;
+            color: #111827;
+            border-radius: 0 12px 12px 12px;
+            padding: 12px 16px;
+            max-width: 85%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* Bubble pesan User */
+        .chat-bubble-user {
+            background-color: #fbbf24;
+            color: #111827;
+            border-radius: 12px 0 12px 12px;
+            padding: 10px 14px;
+            max-width: 80%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .chat-bubble-ai p {
+            margin-bottom: 0.5rem;
+        }
+
+        .chat-bubble-ai p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Ordered list (1. 2. 3.) */
+        .chat-bubble-ai ol {
+            list-style: decimal;
+            padding-left: 1.4rem;
+            margin: 0.5rem 0;
+        }
+
+        .chat-bubble-ai ol li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.25rem;
+        }
+
+        /* Unordered list (* - •) */
+        .chat-bubble-ai ul {
+            list-style: disc;
+            padding-left: 1.4rem;
+            margin: 0.25rem 0;
+        }
+
+        .chat-bubble-ai ul li {
+            margin-bottom: 0.25rem;
+            padding-left: 0.25rem;
+        }
+
+        .chat-bubble-ai li>ul {
+            margin-top: 0.25rem;
+            list-style: circle;
+        }
+
+        .chat-bubble-ai strong {
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .chat-bubble-ai hr {
+            border: none;
+            border-top: 1px solid #d1d5db;
+            margin: 0.75rem 0;
+        }
+
+        .chat-bubble-ai code {
+            background: #e5e7eb;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: monospace;
+        }
+
+        .chat-bubble-ai .hotline {
+            display: inline-block;
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            color: #92400e;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .dot-1 {
+            animation: bounce 1.2s infinite 0s;
+        }
+
+        .dot-2 {
+            animation: bounce 1.2s infinite 0.2s;
+        }
+
+        .dot-3 {
+            animation: bounce 1.2s infinite 0.4s;
         }
     </style>
 </head>
 
 <body class="bg-gray-100 font-sans">
+
     <header x-data="{ open: false }" class="bg-black text-white fixed top-0 left-0 right-0 z-30 shadow-lg">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-2 border-b border-gray-600">
@@ -101,92 +217,90 @@
             <div class="absolute inset-0 bg-black opacity-40"></div>
             <div class="relative z-10 container mx-auto px-4 text-center text-white" data-aos="fade-in">
                 <h1 class="text-4xl lg:text-5xl font-bold uppercase">LAYANAN INFORMASI</h1>
-                {{-- UBAH: Mengganti nama Chatbot di hero section --}}
-                <p class="mt-4 text-lg lg:text-xl max-w-3xl mx-auto">Tanyakan segala hal tentang Polres Tulungagung
-                    melalui GAYATRI AI</p>
+                <p class="mt-4 text-lg lg:text-xl max-w-3xl mx-auto">
+                    Tanyakan segala hal tentang Polres Tulungagung melalui <strong>GAYATRI AI</strong>
+                </p>
             </div>
         </div>
     </main>
 
-
     <section id="chatbot-section" class="py-24 bg-gray-50">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 uppercase tracking-wide">GAYATRI AI POLRES
-                    Tulungagung</h2>
+
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 uppercase tracking-wide">
+                    GAYATRI AI POLRES Tulungagung
+                </h2>
                 <p class="text-gray-500 mt-2">Layanan chat real-time untuk menjawab pertanyaan Anda secara instan.</p>
                 <div class="w-24 h-1 bg-yellow-400 mx-auto mt-4"></div>
             </div>
             <div x-data="chatBot()" x-init="initChat()"
-                class="max-w-3xl mx-auto bg-white rounded-lg shadow-2xl flex flex-col h-[600px] border border-gray-200">
-
-                <div class="bg-black text-white p-4 rounded-t-lg flex justify-between items-center">
-                    <div class="flex items-center">
-                        <div class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-                        <h3 class="font-bold">GAYATRI AI</h3>
+                class="max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200 overflow-hidden"
+                style="height: 620px;">
+                <div class="bg-black text-white px-5 py-4 flex justify-between items-center flex-shrink-0">
+                    <div class="flex items-center gap-3">
+                        <div class="relative">
+                            <img src="{{ asset('assets/images/Gayatriai.png') }}" alt="Gayatri AI"
+                                class="w-9 h-9 rounded-full object-cover border-2 border-yellow-400">
+                            <span
+                                class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 rounded-full border border-black"></span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm tracking-wide">GAYATRI AI</p>
+                            <p class="text-xs text-gray-400">Asisten Virtual Polres Tulungagung</p>
+                        </div>
                     </div>
-                    <button @click="clearChat()" class="text-sm text-gray-400 hover:text-yellow-400">
-                        <i class="fas fa-sync-alt mr-1"></i> Mulai Baru
+                    <button @click="clearChat()"
+                        class="flex items-center gap-1 text-xs text-gray-400 hover:text-yellow-400 transition-colors">
+                        <i class="fas fa-rotate-right text-xs"></i>
+                        <span>Mulai Baru</span>
                     </button>
                 </div>
 
-                <div id="chat-box" class="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col"
+                <div id="chat-messages" class="flex-1 overflow-y-auto px-4 py-5 space-y-4 bg-gray-50"
                     x-ref="messagesContainer">
-
                     <template x-for="message in messages" :key="message.id">
-                        <div
-                            :class="{
-                                'flex justify-end': message.role === 'user',
-                                'flex justify-start space-x-3 items-start': message.role === 'model'
-                            }">
 
-                            <template x-if="message.role === 'model'">
-                                <div class="flex-shrink-0 mt-1">
-                                    <img src="{{ asset('assets/images/Gayatriai.png') }}" alt="GAYATRI AI"
-                                        class="ai-profile-img">
-                                </div>
-                            </template>
-
-                            <div
-                                :class="{
-                                    'bg-yellow-400 text-gray-900 rounded-bl-lg rounded-tl-lg rounded-br-md p-3 max-w-[85%] shadow': message
-                                        .role === 'user',
-                                    'bg-gray-300 text-gray-800 rounded-br-lg rounded-tr-lg rounded-tl-md p-3 max-w-[85%] shadow whitespace-pre-wrap': message
-                                        .role === 'model'
-                                }">
-                                <p x-html="message.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')"></p>
+                        <div class="w-full">
+                            <div x-show="message.role === 'model'" class="flex items-start gap-2">
+                                <img src="{{ asset('assets/images/Gayatriai.png') }}" alt="AI"
+                                    class="ai-profile-img mt-1">
+                                <div class="chat-bubble-ai" x-html="parseMarkdown(message.text)"></div>
                             </div>
+                            <div x-show="message.role === 'user'" class="flex justify-end">
+                                <div class="chat-bubble-user" x-text="message.text"></div>
+                            </div>
+
                         </div>
                     </template>
 
-                    <div x-show="isLoading" class="flex justify-start items-start space-x-3">
-                        <div class="flex-shrink-0 mt-1">
-                            <img src="{{ asset('assets/images/Gayatriai.png') }}" alt="GAYATRI AI"
-                                class="ai-profile-img">
-                        </div>
-                        <div
-                            class="bg-gray-100 text-gray-500 rounded-br-lg rounded-tr-lg rounded-tl-md p-3 max-w-[85%]">
-                            <span class="inline-flex items-center">
-                                <span class="animate-bounce">.</span><span class="animate-bounce"
-                                    style="animation-delay: 100ms">.</span><span class="animate-bounce"
-                                    style="animation-delay: 200ms">.</span>
-                            </span>
+                    <div x-show="isLoading" class="flex items-start gap-2">
+                        <img src="{{ asset('assets/images/Gayatriai.png') }}" alt="AI"
+                            class="ai-profile-img mt-1">
+                        <div class="chat-bubble-ai flex items-center gap-1 px-4 py-3">
+                            <span class="dot-1 inline-block w-2 h-2 bg-gray-400 rounded-full"></span>
+                            <span class="dot-2 inline-block w-2 h-2 bg-gray-400 rounded-full"></span>
+                            <span class="dot-3 inline-block w-2 h-2 bg-gray-400 rounded-full"></span>
                         </div>
                     </div>
                 </div>
 
-                <form @submit.prevent="sendMessage()" class="p-4 border-t border-gray-200">
-                    <div class="flex items-center">
+                <div class="px-4 py-3 border-t border-gray-200 bg-white flex-shrink-0">
+                    <form @submit.prevent="sendMessage()" class="flex items-center gap-2">
                         <input type="text" x-model="newMessage" :disabled="isLoading"
-                            placeholder="Ketik pesan Anda..."
-                            class="flex-1 border-gray-300 focus:border-yellow-500 focus:ring-yellow-500 rounded-l-md shadow-sm disabled:opacity-50">
+                            placeholder="Ketik pertanyaan Anda di sini..."
+                            class="flex-1 border border-gray-300 rounded-full px-4 py-2 text-sm
+                                   focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100
+                                   disabled:opacity-50 disabled:cursor-not-allowed transition">
                         <button type="submit" :disabled="!newMessage.trim() || isLoading"
-                            class="bg-yellow-500 text-black font-semibold py-2 px-4 rounded-r-md hover:bg-yellow-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed">
-                            <i class="fas fa-paper-plane"></i>
+                            class="w-10 h-10 flex items-center justify-center rounded-full
+                                   bg-yellow-400 hover:bg-yellow-500 text-black
+                                   disabled:bg-gray-300 disabled:cursor-not-allowed
+                                   transition-colors flex-shrink-0">
+                            <i class="fas fa-paper-plane text-sm"></i>
                         </button>
-                    </div>
-                    <p x-show="error" x-text="error" class="text-red-500 text-sm mt-2"></p>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -205,8 +319,8 @@
                         <li><a href="{{ url('/') }}" class="hover:text-yellow-400">Beranda</a></li>
                         <li><a href="{{ route('profil.publik') }}" class="hover:text-yellow-400">Profil</a></li>
                         <li><a href="{{ route('inovasi.index') }}" class="hover:text-yellow-400">Inovasi</a></li>
-                        <li><a href="{{ route('faq.index') }}" class="hover:text-yellow-400">Layanan Informasi</a>
-                        </li>
+                        <li><a href="{{ route('faq.index') }}" class="hover:text-yellow-400">Layanan
+                                Informasi</a></li>
                     </ul>
                 </div>
                 <div>
@@ -245,15 +359,120 @@
             </div>
         </div>
     </footer>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
             duration: 800,
-            once: false,
+            once: false
         });
     </script>
 
     <script>
+        function parseMarkdown(text) {
+            if (!text) return '';
+
+            let html = text;
+
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+            html = html.replace(/(?<!\*)\*(?!\*)(.*?)(?<!\*)\*(?!\*)/g, '<em>$1</em>');
+
+            html = html.replace(/^[-=]{3,}\s*$/gm, '<hr>');
+
+            const lines = html.split('\n');
+            const result = [];
+            let inOl = false;
+            let inUl = false;
+            let inSubUl = false;
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const subListMatch = line.match(/^[ \t]{2,}[\*\-•]\s+(.*)/);
+                const olMatch = line.match(/^(\d+)\.\s+(.*)/);
+                const ulMatch = line.match(/^[\*\-•]\s+(.*)/);
+
+                if (subListMatch) {
+                    if (!inSubUl) {
+                        if (result.length > 0) {
+                            const last = result[result.length - 1];
+                            if (last.endsWith('</li>')) {
+                                result[result.length - 1] = last.slice(0, -5) + '<ul>';
+                                inSubUl = true;
+                            }
+                        }
+                    }
+                    result.push(`<li>${subListMatch[1]}</li>`);
+
+                } else if (olMatch) {
+                    if (inSubUl) {
+                        result.push('</ul></li>');
+                        inSubUl = false;
+                    }
+                    if (inUl) {
+                        result.push('</ul>');
+                        inUl = false;
+                    }
+                    if (!inOl) {
+                        result.push('<ol>');
+                        inOl = true;
+                    }
+                    result.push(`<li>${olMatch[2]}</li>`);
+
+                } else if (ulMatch) {
+                    if (inSubUl) {
+                        result.push('</ul></li>');
+                        inSubUl = false;
+                    }
+                    if (inOl) {
+                        result.push('</ol>');
+                        inOl = false;
+                    }
+                    if (!inUl) {
+                        result.push('<ul>');
+                        inUl = true;
+                    }
+                    result.push(`<li>${ulMatch[1]}</li>`);
+
+                } else {
+                    if (inSubUl) {
+                        result.push('</ul></li>');
+                        inSubUl = false;
+                    }
+                    if (inOl) {
+                        result.push('</ol>');
+                        inOl = false;
+                    }
+                    if (inUl) {
+                        result.push('</ul>');
+                        inUl = false;
+                    }
+
+                    if (line.trim() === '') {
+                        result.push('<br>');
+                    } else if (line.match(/^<hr>/)) {
+                        result.push(line);
+                    } else {
+                        result.push(`<p>${line}</p>`);
+                    }
+                }
+            }
+
+            if (inSubUl) result.push('</ul></li>');
+            if (inOl) result.push('</ol>');
+            if (inUl) result.push('</ul>');
+
+
+            html = result.join('');
+
+            html = html.replace(/(<br>\s*){3,}/g, '<br><br>');
+
+            html = html.replace(/<br>\s*(<\/?(?:ol|ul|li|p|hr)[^>]*>)/g, '$1');
+            html = html.replace(/(<\/?(?:ol|ul|li|p|hr)[^>]*>)\s*<br>/g, '$1');
+
+            return html;
+        }
+
         function chatBot() {
             return {
                 messages: [],
@@ -262,88 +481,93 @@
                 error: '',
 
                 initChat() {
-                    // Menambahkan pesan sambutan (opsional)
-                    this.messages.push({
-                        id: Date.now(),
+                    this.messages = [{
+                        id: 1,
                         role: 'model',
-                        text: 'Halo! Saya GAYATRI AI, asisten virtual Polres Tulungagung. Ada yang bisa saya bantu terkait layanan kepolisian?'
-                    });
+                        text: 'Halo! 👋 Saya **GAYATRI AI**, asisten virtual resmi Polres Tulungagung.\n\nSaya siap membantu Anda dengan informasi seputar:\n* Layanan SIM, SKCK, BPKB/STNK\n* Prosedur pelaporan & pengaduan\n* Tindakan darurat & keamanan\n* Lalu lintas & berkendara\n\nSilakan ketik pertanyaan Anda! 🙏',
+                    }];
+                    this.newMessage = '';
+                    this.isLoading = false;
+                    this.error = '';
+                    this.$nextTick(() => this.scrollToBottom());
+                },
+
+                clearChat() {
+                    this.initChat();
                 },
 
                 async sendMessage() {
-                    if (!this.newMessage.trim()) return;
+                    if (!this.newMessage.trim() || this.isLoading) return;
 
-                    // 1. Simpan pesan user ke layar
-                    const userText = this.newMessage;
+                    const userText = this.newMessage.trim();
+                    this.newMessage = '';
+                    this.error = '';
+                    this.isLoading = true;
+
                     this.messages.push({
                         id: Date.now(),
                         role: 'user',
                         text: userText
                     });
+                    this.$nextTick(() => this.scrollToBottom());
 
-                    // 2. Reset input & tampilkan loading
-                    this.newMessage = '';
-                    this.isLoading = true;
-                    this.error = '';
-
-                    // 3. AMBIL CSRF TOKEN DARI META TAG DI HEAD
                     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+                    const chatHistory = this.messages
+                        .slice(1, -1)
+                        .map(m => ({
+                            role: m.role,
+                            text: m.text
+                        }));
+
                     try {
-                        // 4. Kirim request dengan Header CSRF
                         const response = await fetch("{{ route('chatbot.generate') }}", {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                                 'Accept': 'application/json',
-                                'X-CSRF-TOKEN': csrfToken // BARIS INI SANGAT PENTING UNTUK CPANEL/LARAVEL
+                                'X-CSRF-TOKEN': csrfToken,
                             },
                             body: JSON.stringify({
                                 message: userText,
-                                history: this.messages.slice(0, -1) // Kirim riwayat obrolan sebelumnya
-                            })
+                                history: chatHistory
+                            }),
                         });
 
                         const data = await response.json();
 
-                        // 5. Tangani jika ada error dari server
-                        if (!response.ok) {
-                            throw new Error(data.reply || 'Terjadi kesalahan pada server AI.');
-                        }
+                        if (!response.ok) throw new Error(data.reply || 'Terjadi kesalahan server.');
 
-                        // 6. Tampilkan balasan AI
                         this.messages.push({
-                            id: Date.now(),
+                            id: Date.now() + 1,
                             role: 'model',
                             text: data.reply
                         });
 
                     } catch (err) {
-                        this.error = err.message;
+                        const errMsg =
+                            'Maaf, GAYATRI AI sedang tidak dapat dijangkau. Silakan coba beberapa saat lagi atau hubungi **110** untuk bantuan darurat.';
                         this.messages.push({
-                            id: Date.now(),
+                            id: Date.now() + 1,
                             role: 'model',
-                            text: 'Maaf, gagal menghubungi GAYATRI AI. Pesan error: ' + err.message
+                            text: errMsg
                         });
                     } finally {
                         this.isLoading = false;
-
-                        // Scroll otomatis ke bawah
-                        this.$nextTick(() => {
-                            const container = this.$refs.messagesContainer;
-                            if (container) container.scrollTop = container.scrollHeight;
-                        });
+                        this.$nextTick(() => this.scrollToBottom());
                     }
                 },
 
-                clearChat() {
-                    this.messages = [];
-                    this.error = '';
-                    this.initChat();
-                }
-            }
+                scrollToBottom() {
+                    const el = this.$refs.messagesContainer;
+                    if (el) setTimeout(() => {
+                        el.scrollTop = el.scrollHeight;
+                    }, 60);
+                },
+            };
         }
     </script>
+
 </body>
 
 </html>
