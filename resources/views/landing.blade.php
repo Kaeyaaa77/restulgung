@@ -90,7 +90,7 @@
 
     <main class="m-0 p-0">
         <div class="w-full leading-none shadow-md">
-            <img src="{{ asset('assets/images/bgnew.jpeg') }}" alt="Banner Polres Tulungagung"
+            <img src="{{ asset('assets/images/backgroundpolres.png') }}" alt="Banner Polres Tulungagung"
                 class="w-full h-auto block">
         </div>
     </main>
