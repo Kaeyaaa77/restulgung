@@ -89,9 +89,16 @@
     <div class="w-full" style="background-color: #ffffff; height: 28px;"></div>
 
     <main class="m-0 p-0">
-        <div class="w-full leading-none shadow-md">
-            <img src="{{ asset('assets/images/backgroundpolres.png') }}" alt="Banner Polres Tulungagung"
-                class="w-full h-auto block">
+        <div class="w-full mx-auto overflow-hidden">
+            @if (isset($banner) && $banner->image_path)
+                <img src="{{ asset('storage/' . $banner->image_path) }}" alt="Banner Polres Tulungagung"
+                    class="w-full h-auto object-cover">
+            @else
+                <div class="w-full bg-gray-400 flex items-center justify-center"
+                    style="max-height: 650px; min-height: 800px;">
+                    <span class="text-white text-2xl font-bold opacity-50">Belum ada banner</span>
+                </div>
+            @endif
         </div>
     </main>
     </div>

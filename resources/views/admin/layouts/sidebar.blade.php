@@ -23,6 +23,13 @@
             Dashboard
         </a>
 
+        <a href="{{ route('admin.banner.index') }}"
+            class="flex items-center px-4 py-2.5 text-sm rounded-lg transition duration-200
+           {{ request()->routeIs('admin.banner.index') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
+            <span class="material-symbols-outlined mr-3">image</span>
+            Kelola Banner Beranda
+        </a>
+
         {{-- Link Konten Layanan --}}
         <a href="{{ route('admin.layanan-content.index') }}"
             class="flex items-center px-4 py-2.5 text-sm rounded-lg transition duration-200

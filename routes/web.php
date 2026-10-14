@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\Auth\PasswordResetLinkController as AdminPassword
 use App\Http\Controllers\Admin\Auth\NewPasswordController as AdminNewPasswordController;
 use App\Http\Controllers\GeminiChatController;
 use App\Http\Controllers\Admin\LayananContentController;
+use App\Http\Controllers\admin\BannerController;
+
 
 //RUTE PUBLIK
 Route::get('/', [HomeController::class, 'index'])->name('landing');
@@ -100,5 +102,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('aduan/{aduan}', [AduanController::class, 'show'])->name('aduan.show');
         Route::delete('aduan/{aduan}', [AduanController::class, 'destroy'])->name('aduan.destroy');
         Route::patch('aduan/{aduan}/status', [AduanController::class, 'updateStatus'])->name('aduan.updateStatus');
+        Route::get('/banner', [BannerController::class, 'index'])->name('banner.index');
+        Route::post('/banner', [BannerController::class, 'storeOrUpdate'])->name('banner.store');
+        Route::delete('/banner', [BannerController::class, 'destroy'])->name('banner.destroy');
     });
 });

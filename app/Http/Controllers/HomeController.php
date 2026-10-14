@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use App\Models\Berita;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,8 +27,10 @@ class HomeController extends Controller
         // NAMA VARIABEL DIUBAH DARI $beritaSamping MENJADI $beritaKecil
         $beritaKecil = $allBerita->skip(5)->take(6);
 
+        $banner = Banner::first();
+
         // PASTIKAN VARIABEL YANG DIKIRIM KE VIEW JUGA DIAKTUALKAN
-        return view('landing', compact('galleries', 'beritaUtama', 'beritaTerbaru', 'beritaKecil'));
+        return view('landing', compact('galleries', 'beritaUtama', 'beritaTerbaru', 'beritaKecil', 'banner'));
 
         // --- AKHIR PERUBAHAN ---
     }
