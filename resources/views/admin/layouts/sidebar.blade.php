@@ -54,6 +54,13 @@
             Galeri
         </a>
 
+        <a href="{{ route('admin.inovasi.index') }}"
+            class="flex items-center px-4 py-2.5 text-sm rounded-lg transition duration-200
+           {{ request()->routeIs('admin.inovasi.*') ? 'font-bold bg-yellow-400 text-gray-900' : 'font-medium text-gray-300 hover:bg-gray-800' }}">
+            <span class="material-symbols-outlined mr-3">lightbulb</span>
+            Inovasi Unggulan
+        </a>
+
         {{-- === AWAL PERBAIKAN === --}}
         {{--
             Logika diubah menjadi:

@@ -107,147 +107,58 @@
                     <h2 class="text-3xl font-bold text-gray-800 uppercase">Daftar Inovasi Unggulan</h2>
                     <div class="w-24 h-1 bg-yellow-400 mx-auto mt-2"></div>
                 </div>
-
-                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16" data-aos="fade-right">
-                    <div class="w-full md:w-1/2">
-                        <div class="text-7xl lg:text-8xl font-bold text-yellow-400 mb-2">01</div>
-                        <h3 class="text-4xl font-bold text-gray-800 tracking-wider mb-4">APLIKASI SIM CERIA</h3>
-                        <p class="text-gray-600 leading-relaxed text-justify">
-                            SIM Ceria Satlantas Tulungagung adalah aplikasi yang menyediakan Informasi, Mekanisme,
-                            Persyaratan, Biaya, dan Segala Hal Tentang SIM atau Surat Izin Mengemudi. Aplikasi ini
-                            bertujuan untuk memudahkan pengguna untuk memperoleh informasi terkait penerbitan SIM, ada
-                            juga fitur untuk Jadwal SIM Keliling di Wilayah Polres Tulungagung, Jawa Timur. Juga dengan
-                            fitur utamanya yaitu pendaftaran SIM Secara Online lewat aplikasi Android.
-                        </p>
-                        <a href="{{ route('inovasi.sim_ceria', ['slug' => 'sim_ceria']) }}"
-                            class="mt-8 inline-block bg-yellow-400 text-black font-bold py-3 px-8 rounded-lg shadow-md hover:bg-yellow-500 transition-colors duration-300">
-                            LIHAT SELENGKAPNYA
-                        </a>
+                {{-- INOVASI DINAMIS (dikelola lewat halaman admin), nomor mulai 1 --}}
+                @foreach ($inovasisDinamis as $i => $item)
+                    @php
+                        $nomor = 1 + $i;
+                        $reverse = $nomor % 2 === 0;
+                    @endphp
+                    <div class="flex flex-col {{ $reverse ? 'md:flex-row-reverse' : 'md:flex-row' }} items-center gap-8 md:gap-16 {{ $i > 0 ? 'mt-20' : '' }}"
+                        data-aos="{{ $reverse ? 'fade-left' : 'fade-right' }}">
+                        <div class="w-full md:w-1/2 min-w-0">
+                            <div class="text-7xl lg:text-8xl font-bold text-yellow-400 mb-2">
+                                {{ str_pad($nomor, 2, '0', STR_PAD_LEFT) }}</div>
+                            <h3
+                                class="text-3xl md:text-4xl font-bold text-gray-800 tracking-wider mb-4 uppercase break-words">
+                                {{ $item->judul }}</h3>
+                            @if ($item->deskripsi)
+                                <p class="text-gray-600 leading-relaxed text-justify">
+                                    {{ \Illuminate\Support\Str::limit($item->deskripsi, 400) }}
+                                </p>
+                            @endif
+                            <div class="mt-8 flex flex-wrap gap-3">
+                                <a href="{{ route('inovasi.show', $item) }}"
+                                    class="inline-block bg-yellow-400 text-black font-bold py-3 px-8 rounded-lg shadow-md hover:bg-yellow-500 transition-colors duration-300">
+                                    LIHAT SELENGKAPNYA
+                                </a>
+                                @if ($item->file_pdf)
+                                    <a href="{{ $item->pdf_url }}" target="_blank" rel="noopener"
+                                        class="inline-flex items-center gap-2 border-2 border-gray-800 text-gray-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-800 hover:text-white transition-colors duration-300">
+                                        <i class="fas fa-file-pdf"></i> PDF
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 flex justify-center">
+                            @if ($item->gambar)
+                                <img src="{{ $item->gambar_url }}" alt="{{ $item->judul }}" loading="lazy"
+                                    class="w-full h-auto max-h-[28rem] object-contain rounded-lg">
+                            @else
+                                <a href="{{ route('inovasi.show', $item) }}"
+                                    class="w-full aspect-video rounded-lg bg-gradient-to-br from-gray-900 to-gray-700 flex flex-col items-center justify-center text-yellow-400 shadow-lg hover:scale-[1.02] transition-transform">
+                                    <i class="fas fa-file-pdf text-6xl"></i>
+                                    <span class="mt-3 text-sm font-semibold text-white">Dokumen PDF</span>
+                                </a>
+                            @endif
+                        </div>
                     </div>
-                    <div class="w-full md:w-1/2">
-                        <img src="{{ asset('assets/images/SIMCERIA.png') }}" alt="Aplikasi SIM CERIA"
-                            class="w-full h-auto rounded-lg">
+                @endforeach
+                @if ($inovasisDinamis->isEmpty())
+                    <div class="text-center py-16 text-gray-500">
+                        <i class="fas fa-lightbulb text-5xl text-yellow-400 mb-4"></i>
+                        <p>Belum ada inovasi unggulan yang ditampilkan.</p>
                     </div>
-                </div>
-
-                <div class="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16 mt-20" data-aos="fade-left">
-                    <div class="w-full md:w-1/2">
-                        <div class="text-7xl lg:text-8xl font-bold text-yellow-400 mb-2">02</div>
-                        <h3 class="text-4xl font-bold text-gray-800 tracking-wider mb-4">APLIKASI SIM ASTUTI</h3>
-                        <p class="text-gray-600 leading-relaxed text-justify">
-                            SIM Astuti adalah aplikasi game yang berisi simulasi ujian teori, juga ada fitur chat /
-                            obrolan, juga ada fitur PvP Online (Player Versus Player)
-                        </p>
-                        <a href="{{ route('inovasi.sim_astuti', ['slug' => 'sim_astuti']) }}"
-                            class="mt-8 inline-block bg-yellow-400 text-black font-bold py-3 px-8 rounded-lg shadow-md hover:bg-yellow-500 transition-colors duration-300">
-                            LIHAT SELENGKAPNYA
-                        </a>
-                    </div>
-                    <div class="w-full md:w-1/2">
-                        <img src="{{ asset('assets/images/SIMASTUTI.png') }}" alt="Aplikasi SIM Astuti"
-                            class="w-full h-auto">
-                    </div>
-                </div>
-
-                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16 mt-20" data-aos="fade-right">
-                    <div class="w-full md:w-1/2">
-                        <div class="text-7xl lg:text-8xl font-bold text-yellow-400 mb-2">03</div>
-                        <h3 class="text-4xl font-bold text-gray-800 tracking-wider mb-4">POS DIGITAL ASTUTI</h3>
-                        <p class="text-gray-600 leading-relaxed text-justify">
-                            Pos Digital Astuti Polres Tulungagung adalah sebuah pos polisi digital berbentuk robot yang
-                            memungkinkan masyarakat untuk berkomunikasi langsung dengan petugas melalui layanan video
-                            call 24 jam untuk mendapatkan berbagai informasi atau membuat laporan kepolisian.
-                        </p>
-                        <a href="{{ route('inovasi.pos_digital_astuti', ['slug' => 'pos_digital_astuti']) }}"
-                            class="mt-8 inline-block bg-yellow-400 text-black font-bold py-3 px-8 rounded-lg shadow-md hover:bg-yellow-500 transition-colors duration-300">
-                            LIHAT SELENGKAPNYA
-                        </a>
-                    </div>
-                    <div class="w-full md:w-1/2">
-                        <img src="{{ asset('assets/images/POSDIGITAL.jpeg') }}" alt="Pos Digital Astuti"
-                            class="w-full h-auto rounded-lg">
-                    </div>
-                </div>
-
-                <div class="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16 mt-20"
-                    data-aos="fade-left">
-                    <div class="w-full md:w-1/2">
-                        <div class="text-7xl lg:text-8xl font-bold text-yellow-400 mb-2">04</div>
-                        <h3 class="text-4xl font-bold text-gray-800 tracking-wider mb-4">ASTUTI MOBILE</h3>
-                        <p class="text-gray-600 leading-relaxed text-justify">
-                            Astuti Mobile Polres Tulungagung adalah layanan terpadu keliling dalam satu truk besar yang
-                            memudahkan masyarakat untuk mengurus perpanjangan SIM, SKCK, hingga layanan paspor dari
-                            imigrasi di berbagai lokasi.
-                        </p>
-                        <a href="{{ route('inovasi.astuti_mobile', ['slug' => 'astuti_mobile']) }}"
-                            class="mt-8 inline-block bg-yellow-400 text-black font-bold py-3 px-8 rounded-lg shadow-md hover:bg-yellow-500 transition-colors duration-300">
-                            LIHAT SELENGKAPNYA
-                        </a>
-                    </div>
-                    <div class="w-full md:w-1/2">
-                        <img src="{{ asset('assets/images/ASTUTIMOBILE.jpeg') }}" alt="Aplikasi SIM Astuti"
-                            class="w-full h-auto rounded-lg">
-                    </div>
-                </div>
-
-                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16 mt-20" data-aos="fade-right">
-                    <div class="w-full md:w-1/2">
-                        <div class="text-7xl lg:text-8xl font-bold text-yellow-400 mb-2">05</div>
-                        <h3 class="text-4xl font-bold text-gray-800 tracking-wider mb-4">TACS</h3>
-                        <p class="text-gray-600 leading-relaxed text-justify">
-                            TACS (Traffic Accident Claim Sistem) adalah aplikasi dari Polres Tulungagung yang
-                            menghubungkan rumah sakit, polisi, dan Jasa Raharja secara digital untuk mempercepat dan
-                            menyederhanakan proses klaim asuransi bagi korban kecelakaan lalu lintas.
-                        </p>
-                        <a href="{{ route('inovasi.tacs', ['slug' => 'tacs']) }}"
-                            class="mt-8 inline-block bg-yellow-400 text-black font-bold py-3 px-8 rounded-lg shadow-md hover:bg-yellow-500 transition-colors duration-300">
-                            LIHAT SELENGKAPNYA
-                        </a>
-                    </div>
-                    <div class="w-full md:w-1/2 flex justify-center">
-                        <img src="{{ asset('assets/images/TACS.png') }}" alt="TACS" class="w-2/3 h-auto">
-                    </div>
-                </div>
-
-                <div class="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16 mt-20"
-                    data-aos="fade-left">
-                    <div class="w-full md:w-1/2">
-                        <div class="text-7xl lg:text-8xl font-bold text-yellow-400 mb-2">06</div>
-                        <h3 class="text-4xl font-bold text-gray-800 tracking-wider mb-4">TAR</h3>
-                        <p class="text-gray-600 leading-relaxed text-justify">
-                            (TAR) Traffic Attitude Record adalah sistem database kepolisian yang mencatat seluruh
-                            riwayat pelanggaran lalu lintas seseorang, di mana data ini terintegrasi dan menjadi
-                            pertimbangan utama saat proses pengurusan SIM maupun SKCK.
-                        </p>
-                        <a href="{{ route('inovasi.tar', ['slug' => 'tar']) }}"
-                            class="mt-8 inline-block bg-yellow-400 text-black font-bold py-3 px-8 rounded-lg shadow-md hover:bg-yellow-500 transition-colors duration-300">
-                            LIHAT SELENGKAPNYA
-                        </a>
-                    </div>
-                    <div class="w-full md:w-1/2 flex justify-center">
-                        <img src="{{ asset('assets/images/TAR.png') }}" alt="Aplikasi TAR" class="w-12/13 h-auto">
-                    </div>
-                </div>
-
-                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16 mt-20" data-aos="fade-right">
-                    <div class="w-full md:w-1/2">
-                        <div class="text-7xl lg:text-8xl font-bold text-yellow-400 mb-2">07</div>
-                        <h3 class="text-4xl font-bold text-gray-800 tracking-wider mb-4">MOBIL SENYUM</h3>
-                        <p class="text-gray-600 leading-relaxed text-justify">
-                            Mobil Senyum adalah program Polres Tulungagung untuk berbagi kebahagiaan dengan memberikan
-                            makanan bergizi gratis kepada masyarakat Tulungagung, sebagai bentuk dukungan
-                            terhadap program nasional dan kegiatan kemasyarakatan yang sudah berjalan.
-                        </p>
-                        <a href="{{ route('inovasi.mobil_senyum') }}"
-                            class="mt-8 inline-block bg-yellow-400 text-black font-bold py-3 px-8 rounded-lg shadow-md hover:bg-yellow-500 transition-colors duration-300">
-                            LIHAT SELENGKAPNYA
-                        </a>
-                    </div>
-                    <div class="w-full md:w-1/2 flex justify-center">
-                        <img src="{{ asset('assets/images/mobilsenyum.png') }}" alt="Mobil Senyum"
-                            class="w-full h-auto rounded-lg">
-                    </div>
-                </div>
+                @endif
             </div>
         </section>
 

@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\Auth\NewPasswordController as AdminNewPasswordCon
 use App\Http\Controllers\GeminiChatController;
 use App\Http\Controllers\Admin\LayananContentController;
 use App\Http\Controllers\admin\BannerController;
+use App\Http\Controllers\Admin\InovasiController as AdminInovasiController;
 
 
 //RUTE PUBLIK
@@ -72,13 +73,7 @@ Route::prefix('profil')->name('profil.')->group(function () {
 
 Route::prefix('inovasi')->name('inovasi.')->group(function () {
     Route::get('/', [InovasiController::class, 'index'])->name('index');
-    Route::get('/pos-digital-astuti', [InovasiController::class, 'posDigitalAstuti'])->name('pos_digital_astuti');
-    Route::get('/sim-ceria', [InovasiController::class, 'simCeria'])->name('sim_ceria');
-    Route::get('/sim-astuti', [InovasiController::class, 'simAstuti'])->name('sim_astuti');
-    Route::get('/astuti-mobile', [InovasiController::class, 'astutiMobile'])->name('astuti_mobile');
-    Route::get('/tacs', [InovasiController::class, 'tacs'])->name('tacs');
-    Route::get('/tar', [InovasiController::class, 'tar'])->name('tar');
-    Route::get('/mobil-senyum', [InovasiController::class, 'mobilSenyum'])->name('mobil_senyum');
+    Route::get('/detail/{inovasi}', [InovasiController::class, 'show'])->whereNumber('inovasi')->name('show');
 });
 
 //RUTE ADMIN
@@ -95,6 +90,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/login/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
         Route::resource('layanan-content', LayananContentController::class);
+        Route::resource('inovasi', AdminInovasiController::class)->except('show');
         Route::resource('beritas', BeritaController::class);
         Route::resource('galleries', GalleryController::class);
         Route::get('aduan', [AduanController::class, 'index'])->name('aduan.index');
